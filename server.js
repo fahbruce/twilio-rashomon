@@ -1,21 +1,19 @@
 const express = require('express');
-const dotenv = require('dotenv');
 const bodyparser = require('body-parser');
 const path = require('path');
-
+const dotenv = require('dotenv');
 dotenv.config({path:'config.env'});
 const PORT = process.env.PORT || 8080;
 
 const app = express();
 
-app.get('/',(req, res)=>{
-    res.render('index');
-})
-
 app.use(bodyparser.urlencoded({extended:true}))
 
 app.set("view engine", "ejs");
 //app.set("views", path.resolve(__dirname,"views/ejs"));
+
+//load routers
+app.use('/', require('./server/routes/router'));
 
 //load assets
 app.use('/css',express.static(path.resolve(__dirname,"assets/css")))
