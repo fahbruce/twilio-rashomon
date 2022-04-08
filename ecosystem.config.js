@@ -8,8 +8,8 @@ module.exports = {
     deploy : {
         production : {
             "user" : "rashomd",
-            "host" : "ssh.cluster031.hosting.ovh.net",
-            "ref"  : 'origin/main',
+            "host" : "146.59.209.152",
+            "ref"  : 'origin/master',
             "repo" : "https://github.com/fahbruce/twilio-rashomon.git",
             "path" : "/homez.1709/rashomd/smstwilio",
             'pre-deploy-local': '',
