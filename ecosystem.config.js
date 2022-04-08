@@ -13,7 +13,7 @@ module.exports = {
             "repo" : "https://github.com/fahbruce/twilio-rashomon.git",
             "path" : "/homez.1709/rashomd/smstwilio",
             'post-deploy' : 'npm install && pm2 reload ecosystem.config.js --eny production',
-            //'pre-setup': ''
+            'pre-setup': ''
         }
     }
   };
