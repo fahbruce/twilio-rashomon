@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <title>Rashômon : Chat</title>
+</head>
+<body>
+  <input type="text" name="accSid" value="<%= accSid %>" hidden>
+  <input type="text" name="authSid" value="<%= authSid %>" hidden>
+  <div class="container clearfix">
+    <div class="people-list" id="people-list">
+      <div class="header-container">
+        <a href="https://rashomon-international.com/" target="_blank"><img src="img/logo.png" alt=""></a>
+        <div class="title-sc">
+          <label for="">Rashômon</label><br>
+          <label for="">International</label>
+        </div>
+      </div>
+      <div class="search">
+        <input id="searchbar" type="text" name="search" placeholder="Rechercher un contact" />
+        <i class="fa fa-search"></i>
+      </div>
+      <%- include('include/_historique') %>
+    </div>
+    
+    <div class="chat">
+      <div class="chat-header clearfix">
+        <div class="chat-about">
+          <div class="chat-with">N° Prospect : <span></span><input id="numberChat" type="tel" value="" hidden></div>
+          <div class="chat-num-messages"><span>Message(s)</span></div>
+        </div>
+        <div class="chat-h-right">
+          <div class="chat-profile">
+            <img src="img/profil.png" class="img-profile" width="34px">
+            <img src="img/sort_down.png" class="sort-down" width="25px">
+            <div class="drop-profil">
+              <ul>
+                <li class="logout_"><a href="/logout">Déconnexion</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div> <!-- end chat-header -->    
+      
+      <div class="chat-history">
+        <%- include('include/_chatContent') %>
+      </div> 
+
+      <div class="bl-chat">
+        <img src="img/chat.png" class="ico-chat">
+      </div>
+
+      <form action="/api/sendSms" method="POST" id="send_sms">
+        <div class="chat-message clearfix">
+          <div class="form-group h-d">
+            <label for="">A</label>
+            <input type="tel" name="number" id="number" class="dest">
+          </div>
+          <div class="number-to">A <span></span></div>
+          <div class="message-c">
+            <div class="form-group">
+              <textarea name="messageContent" id="messageContent" placeholder ="Taper votre message" rows="3"></textarea>
+            </div>
+            
+            <button class="btn-send" type="submit" value="Envoyer">
+              <img src="img/send.png" class="send-sms">
+            </button>
+          </div>
+          
+        </div> <!-- end chat-message -->
+      </form>
+
+    
+
+    </div> <!-- end chat -->
+    
+  </div> <!-- end container -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="js/chatClient.js"></script>
+  <script>
+    $(document).ready(function(){
+      $('#searchbar').keyup(function(){
+        search_contact();
+      })
+      function search_contact() {
+       let input = document.getElementById('searchbar').value
+        input=input.toLowerCase();
+        let x = document.getElementsByClassName('lg-story');
+          
+        for (i = 0; i < x.length; i++) { 
+            if (!x[i].innerHTML.toLowerCase().includes(input)) {
+                x[i].style.display="none";
+            }
+            else {
+                x[i].style.display="list-item";                 
+            }
+        }
+      }
+    })
+  </script>
+<!--
+<script id="message-template" type="text/x-handlebars-template">
+  <li class="clearfix">
+    <div class="message-data align-right">
+      <span class="message-data-time" >{{time}}, Today</span> &nbsp; &nbsp;
+      <span class="message-data-name" >Olia</span> <i class="fa fa-circle me"></i>
+    </div>
+    <div class="message other-message float-right">
+      {{messageOutput}}
+    </div>
+  </li>
+</script>
+
+<script id="message-response-template" type="text/x-handlebars-template">
+  <li>
+    <div class="message-data">
+      <span class="message-data-name"><i class="fa fa-circle online"></i> Vincent</span>
+      <span class="message-data-time">{{time}}, Today</span>
+    </div>
+    <div class="message my-message">
+      {{response}}
+    </div>
+  </li>
+</script>-->
+
+</body>
+</html>

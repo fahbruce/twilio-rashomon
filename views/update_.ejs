@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/list_user.css">
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+    <title>Modification</title>
+</head>
+<body>
+    <div class="container container-inc">
+        <div class="head-inc">
+            <h2>Modification</h2>
+            <a href="/" class="homeInc"><i class="fa fa-home"></i></a>
+        </div>
+        <div class="bl-success"></div>
+        <div class="body-inc">
+            <form id="update_user">
+                <div class="form-group">
+                    <label for="">Type</label>
+                    <select class="r-user form-control">
+                        <option value="1">Administrateur</option>
+                        <option value="0">Utilisateur Simple</option>
+                    </select>
+                    <input type="text" name="role" value="<%= user.role %>" id="_role" hidden disabled>
+                </div>
+                <div class="form-group">
+                    <label for="">Téléphone</label>
+                    <input type="tel" name="tel" class="form-control" id="_tel" value="<%= user.tel %>">
+                </div>
+                <div class="form-group bl-messageTel"></div>
+                <div class="form-group">
+                    <label for="">Mail</label>
+                    <input type="text" name="email" class="form-control" id="_mail" value="<%= user.email %>">
+                </div>
+                <div class="form-group bl-messageEmail"></div>
+                <div class="form-group">
+                    <label for="">Mot de passe</label>
+                    <input type="password" name="password" class="form-control" id="_password" >
+                </div>
+                <div class="form-group bl-messageMDP"></div>
+                <div class="form-group">
+                    <label for="">Confirmer votre mot de passe</label>
+                    <input type="password" name="confirm_password" class="form-control" id="_cpassword" required>
+                </div>
+                <div class="form-group bl-messageInc"></div>
+                <div class="form-group text-center">
+                    <button type="submit" name="" class="btn-inc">Modifier</button>
+                </div>
+            </form>
+            <div class="foot-inc">
+                <a href="/lst-user">Tous les utilisateurs</a>
+            </div>
+        </div>
+    </div>
+    <a href="/lst-user">Tous les utilisateurs</a>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/global.js"></script>
+    <script>
+        $(function(){
+            var valDefaultRole = $("input[name=role]").val();
+            $(".r-user").val(valDefaultRole);
+        })
+    </script>
+</body>
+</html>

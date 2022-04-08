@@ -1,0 +1,56 @@
+<div class="phone_">
+    <div class="bl-loading"></div>
+               
+    <div id="chatSMS" class="chat-content overflow">
+        <!-- ------------------------------------------------------------------------------------------------- -->
+        <!-- une action se passe ici lors de la chargement du req ajax dans chatClient.js du dossier assets/js -->
+        <!-- ------------------------------------------------------------------------------------------------- -->
+        <div class="my-number">
+            <label for="" class="nameExp m-0"><span></span></label><br>
+            <span></span><input id="numberChat" type="tel" value="" hidden> <!--hidden-->
+        </div>
+    </div>
+
+    <div class="resp-message">
+        <button class="btn-resp btn-resp_">Répondre</button>
+        <form id="send_sms" class="send-form send-form-cust form-answer">
+            <span class="bl-status-env"></span>
+            <div class="chat-message clearfix">
+                <div class="form-group h-d"><!-- h-d-->
+                    <label for="">A</label>
+                    <input type="tel" name="number" id="number" value="" class="dest numberTo">
+                </div>
+                <div class="text-sms">
+                    <div class="message-c">
+                        <div class="form-group mb-0">
+                            <textarea name="messageContent" id="messageContentAs" class="form-control" placeholder ="Taper votre message" rows="3"></textarea>
+                        </div>
+                                                
+                        <button class="btn-send btn-send-cust answer-sms" type="button" value="Envoyer">
+                            <i class="fa fa-send send-sms"></i>
+                        </button>
+                        <input type="text" id="tempNameClient" value="" hidden disabled>
+                    </div>
+                </div>
+        </form>
+      <!--  <form action="" method="" id="send_sms" class="send-form">
+                <div class="chat-message clearfix">
+                    <div class="form-group h-d">
+                        <label for="">A</label>
+                        <input type="tel" name="number" id="number" class="dest">
+                    </div>
+                    <div class="number-to">A <span></span></div>
+                    <div class="message-c">
+                        <div class="form-group">
+                        <textarea name="messageContent" id="messageContent" placeholder ="Taper votre message" rows="3"></textarea>
+                        </div>
+                                                
+                        <button class="btn-send" type="submit" value="Envoyer">
+                        <img src="img/send.png" class="send-sms">
+                        </button>
+                    </div>
+                                        
+                </div>  
+            </form>-->
+    </div>
+</div>

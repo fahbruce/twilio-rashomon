@@ -1,143 +1,239 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/style.css">
-  <title>Document</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="img/icons/favicon.ico"/>
+    <link rel="stylesheet" type="text/css" href="css/style_index.css"/>
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    
+    <title>Rashômon : Chat</title>
 </head>
 <body>
-  <div class="container clearfix">
-    <div class="people-list" id="people-list">
-      <div class="header-container">
-        <a href="https://rashomon-international.com/" target="_blank"><img src="img/logo.png" alt=""></a>
-        <div class="title-sc">
-          <label for="">Rashômon</label><br>
-          <label for="">International</label>
-        </div>
-      </div>
-      <div class="search">
-        <input type="text" placeholder="Rechercher un contact" />
-        <i class="fa fa-search"></i>
-      </div>
-      <%- include('include/_historique') %>
-    </div>
+  <input type="text" name="accSid" value="<%= accSid %>" hidden>
+  <input type="text" name="authSid" value="<%= authSid %>" hidden>
+  <input type="text" name="idUser" value="<%= id %>" hidden>
+  <input type="text" name="role" id="role" value="<%= role %>" hidden>
+    <div class="container-fluid m-0 p-0">
+        <div class="row mr-0 ml-0">
+            <div class="nav-left row col-lg-6 pl-0 pr-0 m-0">
+                <div class="left-one col-lg-6 p-0">
+                    <div class="head-left">
+                        <a href="https://rashomon-international.com/" target="_blank"><img src="img/logo.png" width="45px" alt=""></a>
+                        <div class="title-sc">
+                            <label for="">Rashômon</label>
+                            <label for="" class="int">International</label>
+                        </div>
+                    </div>
     
-    <div class="chat">
-      <div class="chat-header clearfix">
-        <div class="chat-about">
-          <div class="chat-with">Chat with Vincent Porter</div>
-          <div class="chat-num-messages">already 1 902 messages</div>
+                    <div class="content-left-one-profile">
+                        <div class="content-left">
+                           <img src="img/profil_.png" width="55px" alt="">
+                           <i class="fa fa-circle me"></i>
+                            <div class="left-profil">
+                                <label for=""><%= mail %></label><br>
+                                <label for="" class=""><%= tel %></label>
+                                <input type="text" id="telUser" value="<%= tel %>" hidden>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="content-left-one">
+                        <div class="content-left r-nav-menu">
+                           <ul class="">
+                                <li class="r-nav-menu_ r-nav-menu_2 active">
+                                    <i class="fa fa-address-book"></i>
+                                    Contact
+                                </li>
+                                <li class="r-nav-menu_ r-nav-menu_1">
+                                    <i class="fa fa-send"></i>
+                                    Campaignes
+                                </li>
+                                <li class="r-nav-menu_ r-nav-menu_3">
+                                    <i class="fa fa-envelope"></i> 
+                                    Boîte de réception &nbsp;&nbsp;<span class="badge badge-danger notif-sms"></span>
+                                </li>
+                                <li class="r-nav-menu_ r-nav-menu_4">
+                                    <i class="fa fa-history"></i>
+                                    Historiques
+                                </li>
+                                <li class="r-nav-menu_ r-nav-menu_5">
+                                    <i class="fa fa-power-off"></i>
+                                    <a href="/logout">Déconnexion</a>
+                                </li>
+                           </ul>
+                        </div>
+                        <div class="rl"></div>
+                    </div>
+                </div>
+                <div class="left-two col-lg-6 p-0">
+                    <!-------------------------------------------
+                    ----------------- CAMPAIGNS ----------------
+                    ----------------------------------------- -->
+    
+                    <div id="rCampaigne" class="dNone">
+                        <div class="head-left">
+                            <i class="fa fa-send"></i> 
+                            <span>Campaignes</span> 
+                        </div>
+                        
+                        <div class="content-left-one">
+                            <div class="content-left">
+                                <form id="send_sms" class="send-form send-new-sms" >
+                                    <div class="">
+                                        <label for="">A</label> <span class="name-dest"></span>
+                                        <input type="tel" name="number" id="number" class="form-control form-control-sm dest numberTo" placeholder="Destinataire">
+                                        <input type="text" name="tempNameContact" id="tempNameContact" class="form-control form-control-sm" hidden disabled>
+                                        <select id="select-contact" class="js-example-basic-single form-control" name="state"></select>
+                                    </div>
+                                    <div class="text-message mt-3">
+                                        <label for="">Votre message</label>
+                                        <textarea name="messageContent" id="messageContent" class="form-control form-control-sm" cols="30" rows="10" placeholder="Votre texte ici"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="load"></div>
+                                        <button type="button" class="btn action-send btn-send">
+                                            <i class="fa fa-send"></i>&nbsp;&nbsp; 
+                                            Envoyer
+                                        </button>
+                                        <button type="button" class="btn action-send-2 btn-send">
+                                            <i class="fa fa-send"></i>&nbsp;&nbsp; 
+                                            Envoyer
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <!-------------------------------------------
+                    ----------------- CONTACT ----------------
+                    ----------------------------------------- -->
+    
+                    <div id="rContact" class="dBlock">
+                        <div class="head-left">
+                            <i class="fa fa-address-book"></i> 
+                            <span>Contact</span> 
+                        </div>
+                        
+                        <div class="content-left-one">
+                            <%- include('include/_contact') %>
+                        </div>
+                    </div>
+    
+                    <!-------------------------------------------
+                    ----------------- INBOX ----------------
+                    ----------------------------------------- -->
+                    <div id="rInbox" class="dNone">
+                        <div class="head-left">
+                            <i class="fa fa-envelope"></i> 
+                            <span>Boîte de réception</span> 
+                            
+                            <a href="/" class="refresh-pg" title="Actualiser">
+                                <i class="fa fa-refresh"></i>
+                            </a>
+                        </div>
+                        
+                        <div class="content-left-one">
+                            <%- include('include/_inbox') %>
+                        </div>
+                    </div>
+    
+                    <!-------------------------------------------
+                    ----------------- HISTORIQUES ----------------
+                    ----------------------------------------- -->
+                    <div id="rHistory" class="dNone">
+                        <div class="head-left">
+                            <i class="fa fa-history"></i>
+                            <span>Historiques</span>
+                        </div>
+                        
+                        <div class="content-left-one">
+                            <%- include('include/_historique') %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="content-right col-lg-6 m-0 p-0 sms-content">
+                <%- include('include/_chatContent') %>
+            </div>
         </div>
-        <i class="fa fa-star"></i>
-      </div> <!-- end chat-header -->
-      
-      <div class="chat-history">
-        <ul>
-          <li class="clearfix">
-            <div class="message-data align-right">
-              <span class="message-data-time" >10:10 AM, Today</span> &nbsp; &nbsp;
-              <span class="message-data-name" >Olia</span> <i class="fa fa-circle me"></i>
-              
-            </div>
-            <div class="message other-message float-right">
-              Hi Vincent, how are you? How is the project coming along?
-            </div>
-          </li>
-          
-          <li>
-            <div class="message-data">
-              <span class="message-data-name"><i class="fa fa-circle online"></i> Vincent</span>
-              <span class="message-data-time">10:12 AM, Today</span>
-            </div>
-            <div class="message my-message">
-              Are we meeting today? Project has been already finished and I have results to show you.
-            </div>
-          </li>
-          
-          <li class="clearfix">
-            <div class="message-data align-right">
-              <span class="message-data-time" >10:14 AM, Today</span> &nbsp; &nbsp;
-              <span class="message-data-name" >Olia</span> <i class="fa fa-circle me"></i>
-              
-            </div>
-            <div class="message other-message float-right">
-              Well I am not sure. The rest of the team is not here yet. Maybe in an hour or so? Have you faced any problems at the last phase of the project?
-            </div>
-          </li>
-          
-          <li>
-            <div class="message-data">
-              <span class="message-data-name"><i class="fa fa-circle online"></i> Vincent</span>
-              <span class="message-data-time">10:20 AM, Today</span>
-            </div>
-            <div class="message my-message">
-              Actually everything was fine. I'm very excited to show this to our team.
-            </div>
-          </li>
-          
-          <li>
-            <div class="message-data">
-              <span class="message-data-name"><i class="fa fa-circle online"></i> Vincent</span>
-              <span class="message-data-time">10:31 AM, Today</span>
-            </div>
-            <i class="fa fa-circle online"></i>
-            <i class="fa fa-circle online" style="color: #AED2A6"></i>
-            <i class="fa fa-circle online" style="color:#DAE9DA"></i>
-          </li>
-          
-        </ul>
         
-      </div> <!-- end chat-history -->
-      <form action="/api/sendSms" method="POST" id="send_sms">
-        <div class="chat-message clearfix">
-          <div class="form-group">
-            <label for="">A</label>
-            <input type="text" name="number" id="number" class="dest">
-          </div>
-          <div class="form-group">
-            <label for="">Message</label>
-            <textarea name="messageContent" id="messageContent" placeholder ="Type your message" rows="3"></textarea>
-          </div>
-
-          <i class="fa fa-file-o"></i> &nbsp;&nbsp;&nbsp;
-          <i class="fa fa-file-image-o"></i>
-          
-          <input type="submit" value="Envoyer"/>
-
-        </div> <!-- end chat-message -->
-      </form>
-      
-    </div> <!-- end chat -->
-    
-  </div> <!-- end container -->
-
-<script id="message-template" type="text/x-handlebars-template">
-  <li class="clearfix">
-    <div class="message-data align-right">
-      <span class="message-data-time" >{{time}}, Today</span> &nbsp; &nbsp;
-      <span class="message-data-name" >Olia</span> <i class="fa fa-circle me"></i>
     </div>
-    <div class="message other-message float-right">
-      {{messageOutput}}
-    </div>
-  </li>
-</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="js/chatClient.js"></script>
+    <script src="js/nav-action.js"></script>
+    <script src="js/contact.js"></script>
 
-<script id="message-response-template" type="text/x-handlebars-template">
-  <li>
-    <div class="message-data">
-      <span class="message-data-name"><i class="fa fa-circle online"></i> Vincent</span>
-      <span class="message-data-time">{{time}}, Today</span>
-    </div>
-    <div class="message my-message">
-      {{response}}
-    </div>
-  </li>
-</script>
+    <script>
+        $(document).ready(function(){
+            $("ul.inbox li ul.list li .body-sms").each(function(){
+                var nbCaractereSMS = $(this).find("p").text();
+                if(nbCaractereSMS.length >= 25 ){
+                    var valeur = nbCaractereSMS.substring(0,25);
+                    $(this).find("p").html(valeur + " ...");
+                }
+            })
+            
 
-<script src="app.js"></script>
+            var role = $('#role').val();
+
+            if(role=="0"){
+                $(".rl button").remove();
+            }else{
+                $(".rl button").remove();
+                $(".rl").append('<button class="btn-GU"><a href="/lst-user">Gestion des utilisateurs</a></button>');
+            }
+
+            ////////////////////////////////////
+            ///// Gestion des buttons send /////
+            ////////////////////////////////////
+            $(".btn-send").attr('disabled', true);
+            $(".send-new-sms textarea#messageContent").keyup(function(){
+                if($(this).val() == ""){
+                    $(".send-new-sms .btn-send").attr('disabled', true);
+                }else{
+                    $(".send-new-sms .btn-send").attr('disabled', false);
+                }
+            })
+
+            $('.form-answer textarea#messageContentAs').keyup(function(){
+                if($(this).val() == ""){
+                    $(".form-answer .btn-send").attr('disabled', true);
+                }else{
+                    $(".form-answer .btn-send").attr('disabled', false);
+                }
+            })
+
+          $('#searchbar').keyup(function(){
+            search_contact();
+          })
+          function search_contact() {
+            let input = document.getElementById('searchbar').value
+                input=input.toLowerCase();
+                let x = document.getElementsByClassName('lg-story');
+                
+                for (i = 0; i < x.length; i++) { 
+                    if (!x[i].innerHTML.toLowerCase().includes(input)) {
+                        x[i].style.display="none";
+                    }
+                    else {
+                        x[i].style.display="list-item";                 
+                    }
+                }
+            }
+            })
+      </script>
 
 </body>
 </html>

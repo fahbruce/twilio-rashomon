@@ -1,0 +1,54 @@
+<ul class="inbox overflow">
+    <li class="p-0">
+      <ul class="list">
+        <% for(var i=0; i < inbox.length; i++) { %>
+          <% if(inbox[i].telDest == tel) { %>
+            <% if(inbox[i].status == "1") { %>
+              <li class="clearfix incoming-list inc li-inbox" title="<%= inbox[i].messageIn %>">
+                <div class="sym-sms"><i class="fa fa-arrow-down in-sms" title="Entrant"></i></div>
+                <div class="ml-sms" id="<%= inbox[i]._id %>"><i class="fa fa-eye-slash l-sms" title="Marquer comme lu"></i></div>
+                <div class="profil">
+                  <img src="img/profil.png" width="57px">
+                </div>
+                <div class="about">
+                  <input type="tel" value='<%= inbox[i].telExp %>' hidden> <!--hidden-->
+                  <input type="text" name="idInbox" value="<%= inbox[i]._id %>"> <!--hidden-->
+                  <div class="name-clt"><span></span></div>
+                  <div class="status">
+                     <%= inbox[i].telExp %>
+                  </div>
+                  <div class="body-sms">
+                    <p> <%= inbox[i].messageIn %></p>
+                 </div>
+                  <div class="dateIn"> <%= moment(inbox[i].dateIn).format('DD MMMM YYYY HH:mm:ss')  %></div>
+                </div>
+              </li>
+            <% } else { %>
+              <li class="clearfix li-inbox" title="<%= inbox[i].messageIn %>">
+                <div class="sym-sms"><i class="fa fa-arrow-down in-sms" title="Entrant"></i></div>
+                <div class="profil">
+                  <img src="img/profil.png" width="57px">
+                </div>
+                <div class="about">
+                  <input type="tel" value='<%= inbox[i].telExp %>' hidden> <!--hidden-->
+                  <div class="name-clt"><span></span></div>
+                  <div class="status">
+                     <%= inbox[i].telExp %>
+                  </div>
+                  <div class="body-sms">
+                    <p> <%= inbox[i].messageIn %></p>
+                  </div>
+                  <div class="dateIn"> <%= moment(inbox[i].dateIn).format('DD MMMM YYYY HH:mm:ss')  %></div>
+                </div>
+              </li>
+            <% } %>
+          <% } %>
+        <% } %> 
+      </ul>
+      <!--<div class="contentStorySMS"></div>-->
+    </li>
+  </ul> 
+  
+  
+  
+  

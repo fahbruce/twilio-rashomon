@@ -1,91 +1,46 @@
-<ul class="list">
-    <li class="clearfix">
-      <div class="about">
-        <div class="name">Vincent Porter</div>
-        <div class="status">
-          <i class="fa fa-circle online"></i> +33 33 45 884 5
-        </div>
-      </div>
-    </li>
-    
-    <li class="clearfix">
-      <div class="about">
-        <div class="name">Aiden Chavez</div>
-        <div class="status">
-          <i class="fa fa-circle offline"></i> +33 33 45 884 5
-        </div>
-      </div>
-    </li>
-    
-    <li class="clearfix">
-      <div class="about">
-        <div class="name">Mike Thomas</div>
-        <div class="status">
-          <i class="fa fa-circle online"></i> +33 33 45 884 5
-        </div>
-      </div>
-    </li>
-    
-    <li class="clearfix">
-       <div class="about">
-        <div class="name">Erica Hughes</div>
-        <div class="status">
-          <i class="fa fa-circle online"></i> +33 33 45 884 5
-        </div>
-      </div>
-    </li>
-    
-    <li class="clearfix">
-      <div class="about">
-        <div class="name">Ginger Johnston</div>
-        <div class="status">
-          <i class="fa fa-circle online"></i> +33 33 45 884 5
-        </div>
-      </div>
-    </li>
-    
-    <li class="clearfix">
-       <div class="about">
-        <div class="name">Tracy Carpenter</div>
-        <div class="status">
-          <i class="fa fa-circle offline"></i> +33 33 45 884 5
-        </div>
-      </div>
-    </li>
-    
-    <li class="clearfix">
-      <div class="about">
-        <div class="name">Christian Kelly</div>
-        <div class="status">
-          <i class="fa fa-circle offline"></i> +33 33 45 884 5
-        </div>
-      </div>
-    </li>
-    
-    <li class="clearfix">
-      <div class="about">
-        <div class="name">Monica Ward</div>
-        <div class="status">
-          <i class="fa fa-circle online"></i> +33 33 45 884 5
-        </div>
-      </div>
-    </li>
-    
-    <li class="clearfix">
-      <div class="about">
-        <div class="name">Dean Henry</div>
-        <div class="status">
-          <i class="fa fa-circle offline"></i> +33 33 45 884 5
-        </div>
-      </div>
-    </li>
-    
-    <li class="clearfix">
-      <div class="about">
-        <div class="name">Peyton Mckinney</div>
-        <div class="status">
-          <i class="fa fa-circle online"></i> +33 33 45 884 5
-        </div>
-      </div>
-    </li>
-  </ul>
+<ul class="story overflow">
+  <li>
+    <ul class="list">
+      <% for(var i=0; i < messages.length; i++) { %>
+          <% if (messages[i].direction == "inbound") { %>
+            <li class="clearfix lg-story li-inbox" title="<%= messages[i].body %>">
+              <div class="tp-sms-in"><span>Client</span></div>
+              <div class="sym-sms"><i class="fa fa-arrow-down in-sms" title="Entrant"></i></div>
+              <div class="profil">
+                <img src="img/profil.png" width="57px">
+              </div>
+              <div class="about">
+                <input type="tel" value='<%= messages[i].from %>' hidden> <!--hidden-->
+                <div class="name-clt"><span></span></div>
+                <div class="status">
+                   <%= messages[i].from %>
+                </div>
+                <div class="dateIn"> <%= moment(messages[i].dateSent).format('DD MMMM YYYY HH:mm:ss')  %></div>
+              </div>
+            </li>
+          <% } else { %>
+            <li class="clearfix lg-story li-inbox" title="<%= messages[i].body %>">
+              <div class="tp-sms-out"><span>Vous</span></div>
+              <div class="sym-sms"><i class="fa fa-arrow-down out-sms" title="Sortant"></i></div>
+              <div class="profil">
+                <img src="img/profil.png" width="57px">
+              </div>
+              <div class="about">
+                <input type="tel" value='<%= messages[i].to %>' hidden> <!--hidden-->
+                <div class="name-clt"><span></span></div>
+                <div class="status">
+                   <%= messages[i].to %>
+                </div>
+                <div class="dateIn"> <%= moment(messages[i].dateSent).format('DD MMMM YYYY HH:mm:ss')  %></div>
+              </div>
+            </li>
+          <% } %>
+       <% } %> 
+      </ul>
+    <!--<div class="contentStorySMS"></div>-->
+  </li>
+</ul> 
+
+
+
+

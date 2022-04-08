@@ -1,0 +1,783 @@
+body{
+    background: linear-gradient(120deg, #a665a6, #e05399);
+}
+
+.nav-left{
+    background: #343232;
+    height: 100vh;
+}
+
+.nav-left .left-one{
+    background: #343232;
+    height: 100vh;
+}
+
+.nav-left .left-two{
+    background: #555555;
+    height: 100vh;
+}
+
+/******************************************
+/************* Style Left One *************
+/******************************************/
+.head-left{
+    background: #fff;
+    display: flex;
+    align-items: center;
+    padding: 15px 0 15px 37px;
+}
+.title-sc{
+    font-size: 17px;
+    font-weight: 400;
+    padding: 0 16px;
+    line-height: 0.8;
+}
+.int{
+    color: #cb599d!important;
+}
+
+.content-left{
+    display: flex;
+    align-items: center;
+    padding: 15px 0 15px 37px;
+    border-bottom: 1px solid #555555;
+}
+.content-left .left-profil{
+    line-height: 1!important;
+    padding: 0 0 0 12px;
+    color: #fff;
+}
+
+.content-left-one .content-left{
+    border-bottom: none;
+}
+.content-left-one ul{
+    list-style: none;
+    padding: 0;
+    width: 100%;
+    border-left: 2px solid transparent;
+}
+.content-left-one ul li{
+    color: #CBCBCB;
+    padding: 9px 0 0 25px;
+}
+.r-nav-menu ul li:hover{
+    cursor: pointer;
+    transition: 0.4s;
+    border-left: 2px solid #c15da0;
+}
+
+.content-left-one ul li i{
+    padding: 0 12px 0 0;
+}
+
+/******************************************
+/************* Style Left Two *************
+/******************************************/
+
+.left-two .head-left{
+    background: #f5f5f5;
+    display: flex;
+    align-items: center;
+    padding: 20px 0 25px 37px!important;
+}
+
+.left-two .head-left i{
+    color: #656161;
+}
+.left-two .head-left span{
+    padding: 0 0 0 14px;
+    color: #656161;
+}
+
+.left-two .content-left-one .content-left{
+    display: flex;
+    align-items: center;
+    padding: 15px 0 15px 37px;
+    padding: 13px 0 13px 16px!important;
+    background: transparent;
+    border-bottom: 1px solid #626262;
+}
+.left-profil .message-content{
+    color: #B2AAAA;
+}
+
+
+/******************************************
+/************* Style Right  ***************
+/******************************************/
+.content-right .phone_ img{
+    width: 47vh;
+    margin: 7px 0;
+}
+
+.content-right .phone_ {
+    text-align: center;
+    height: 100%;
+}
+
+.phone_{
+    position: relative;
+}
+.chat-content {
+    top: 0;
+    left: 31%;
+    top: 51px;
+    font-size: 16px;
+    width: 100%;
+    height: 79vh;
+    overflow-x: auto;
+    padding: 1px 23px 1px;
+}
+
+.overflow::-webkit-scrollbar-track, ul.list::-webkit-scrollbar-track, ul.contact-list::-webkit-scrollbar-track {
+    background-color: #d5d5d5!important;
+  }
+  
+  .overflow::-webkit-scrollbar, ul.list::-webkit-scrollbar, ul.contact-list::-webkit-scrollbar-track {
+    width: 10px!important;
+  }
+  
+  .overflow::-webkit-scrollbar-thumb, ul.list::-webkit-scrollbar-thumb, ul.contact-list::-webkit-scrollbar-track {
+    background: linear-gradient(120deg, #a665a6, #db545a)!important;
+  }
+.chat-content ul.incoming{
+    font-size: 16px;
+    width: 165px;
+    border-radius: 15px;
+}
+.chat-content ul li .message{
+    background: #f1f1f1;
+    width: 356px;
+    padding: 14px 18px 16px;
+    text-align: initial;
+    border-radius: 20px;
+    margin-top: 6px;
+}
+.chat-content ul{
+    list-style: none;
+    padding: 0;
+}
+.chat-content ul li .message-data{
+    color: #A5A5A5;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.chat-content ul.outcoming{
+    font-size: 16px;
+    width: 165px;
+    border-radius: 15px;
+    margin: 0;
+    float: right;
+}
+
+.chat-content ul.outbound-api li .message{
+    background: linear-gradient(120deg, #a665a6, #e05399);
+    color: #fff;
+}
+.send-form{
+    color: white;
+    padding: 0 27px 0 9px;
+    width: 100%;
+}
+.send-form textarea{
+   width: 100%;
+}
+.my-number {
+    position: sticky!important;
+    top: -1px;
+    box-shadow: 0px 18px 12px -21px #dddddd;
+    margin: 0 0 20px 0;
+    width: 100%;
+    color: #343232;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    background: #fdfdfd;
+    display: flex;
+    align-items: center;
+    padding: 20px 0 25px!important;
+}
+
+.action-send, .action-send-2{
+    float: right;
+    background: linear-gradient(120deg, #a665a6, #e05399);
+    color: #fff;
+    margin: 22px 0;
+    border-radius: 20px!important;
+    width: 121px;
+}
+
+.action-send:hover, .action-send-2:hover{
+    cursor: pointer;
+    background: linear-gradient(120deg, #e05399, #a665a6);
+    transition: 0.4s;
+}
+
+.active{
+    border-left: 2px solid #c15da0;
+    color: white;
+    font-weight: 500;
+}
+.dBlock{
+    display: block;
+}
+.dNone{
+    display: none;
+}
+
+.story, .inbox{
+    height: 88vh;
+    overflow-x: auto;
+}
+.story li{padding: 0!important;}
+
+.contentStorySMS{
+    margin: 18px 22px;
+}
+.contentStorySMS .list{
+    border-bottom: 1px solid #6a6a6a;
+    margin-bottom: 12px;
+    padding-bottom: 13px;
+}
+
+ul.list li:hover{
+    transition: 0.4s;
+    cursor: pointer!important;
+    background: #343232;
+    color: #fff;
+}
+
+ul.list li{
+    width: 100%;
+    border-bottom: 1px solid #f7f7f738;
+    padding: 12px 23px 12px!important;
+}
+
+ul.list li.clearfix .about{
+    width: 100%;
+    padding: 3px 0 0 13px;
+}
+
+.inbound .clearfix{
+    float: left;
+    margin: 0px 0 27px; 
+    width:100%;
+}
+.outbound-api .clearfix{
+    float: right;
+    margin: 0px 0 27px;         
+    width:100%;
+}
+
+.outbound-api .clearfix .message-data{
+    justify-content: end!important;
+}
+
+.resp-message{
+    width: 100%;
+    background: #dddddd;
+    height: 17vh;
+    margin-top: 25px;
+}
+
+.resp-message button:hover{
+    cursor: pointer;
+}
+
+.btn-resp{
+    margin: 21px 0;
+}
+
+.btn-send-cust{
+    padding: 0;
+    height: 53px;
+    font-size: 26px;
+    color: #088fc3;
+    border-radius: 31px;
+    border: 0px solid black;
+    margin: 10px 4px 0 2px!important;
+    background: transparent;
+}
+.btn-send-cust:hover{
+    font-size: 26px;
+    color: #26a6d7;
+}
+.btn-send-cust:focus{
+    outline: none!important;
+}
+
+.btn-resp_{
+    background: #539f2c;
+    border: none;
+    padding: 6px 24px;
+    color: #fff;
+    border-radius: 25px;
+    display: none;
+}
+
+.send-form-cust{
+    padding: 0 7px 0 16px!important;
+}
+
+.text-sms{
+    display: none;
+    padding: 14px 0 0;
+}
+.btn-send:disabled,
+.btn-send[disabled]{
+    background-color: #cccccc!important;
+    color: #ffffff!important;
+    pointer-events: none;
+}
+
+.loader {
+    border: 5px solid #c3c3c385;
+    border-top: 5px solid #fdfdfd;
+    border-radius: 100%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    position: absolute;
+    right: 0;
+    margin-top: 25px;
+    right: 166px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/** Modal STYLE*/
+/* The Modal (background) */
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content */
+  .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 76vh;
+  }
+
+   .modal-content .content {
+    text-align: center;
+  }
+  
+  
+  /* The Close Button */
+  span.close {
+    float: left;
+    font-size: 28px!important;
+    font-weight: 700;
+    line-height: 1;
+    color: #9b9b9b!important;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .5;
+    width: 33px;
+    position: absolute;
+    right: -17px;
+    top: -19px;
+    background: #ffffff;
+    text-align: center;
+    padding: 0 0;
+    border-radius: 100%;
+    opacity: 1!important;
+    padding: 0 0 -35px;
+    height: 33px;
+  }
+  
+  span.close:hover,
+  span.close:focus {
+    color: #d55663!important;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  /**** INPUT FILE STYLE ****/
+  .inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.inputfile + label{
+    background: linear-gradient(120deg, #a665a6, #db545a);
+    width: 255px;
+    border-radius: 32px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 400;
+    padding: 5px 0 8px;
+    color: #fff;
+
+  /*  -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;*/
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+    transition: 0.4s;
+    cursor: pointer;
+    background: linear-gradient(120deg, #db545a, #a665a6);
+}
+
+.inputfile + label {
+	cursor: pointer; /* "hand" cursor */
+}
+
+.inputfile:focus + label {
+	outline: 1px dotted #000;
+	outline: -webkit-focus-ring-color auto 5px;
+}
+
+div.action-foot{
+    padding: 19px 0 0;
+    border-top: 1px solid #dfdfdf;
+    margin-top: 22px;
+    text-align: end;
+}
+
+li.inc{
+    background: #f5f5f52b!important;
+}
+
+.my-number label.nameExp{
+    color: #d75660;
+}
+.my-number span{
+    font-size: 16px;
+}
+
+.contact-list{
+    overflow-x: auto;
+    height: 66vh;
+}
+
+/*ul li{
+    -moz-user-select: none; 
+    -webkit-user-select: none; 
+    -ms-user-select: none; 
+    user-select: none
+}*/
+
+/*#table_contact ul.contact-list li{
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}*/
+
+#myBtn{
+    width: 88%;
+    margin: 18px 6% 0;
+    background: linear-gradient(120deg, #a665a6, #db545a);
+    border: 0px solid transparent;
+}
+
+#myBtn:hover{
+    cursor: pointer;
+    transition: 0.4s;
+    background: linear-gradient(120deg, #db545a, #a665a6);
+}
+
+#rContact .content-left{
+    padding: 0!important;
+}
+#table_contact{
+    width: 100%;
+}
+#table_contact ul li{
+    padding: 9px 27px!important;
+    border-bottom: 1px solid #ffffff1f;
+    position: relative;
+}
+
+#table_contact ul li label{
+    margin-bottom: 0px!important;
+}
+
+#table_contact ul li label:first-child{
+    color: #fff;
+}
+
+#table_contact ul.contact-list li:hover {
+    transition: 0.4s;
+    cursor: pointer!important;
+    background: #343232;
+    color: #fff;
+}
+
+#table_contact ul li button{
+    display: none;
+    position: absolute;
+    top: 22px;
+    background: #c55b79;
+    color: #fff;
+    border: 0;
+    right: 12px;
+    border-radius: 6px;
+    padding: 2px 19px;
+}
+
+#table_contact ul li button:hover{
+    cursor: pointer;
+    background: #a665a6;
+}
+
+#table_contact ul li:hover button{
+    display: initial;
+}
+
+div.search{
+    position:relative!important;
+}
+#searchbar{
+    margin: 18px 20px;
+    width: 87%;
+    padding: 6px 12px;
+    border-radius: 8px;
+}
+
+#searchbar:focus{
+    border: 1px solid #d65662;
+    outline: none!important;
+}
+
+div.search i{
+    position: absolute;
+    top: 30px;
+    right: 37px;
+    color: #d65662;
+}
+
+li.li-inbox {
+    display: flex;
+    background: #484848;
+    margin: 11px 9px;
+    border-radius: 7px;
+    width: 93%!important;
+    position:relative;
+}
+
+
+li.li-inbox input{
+    display:none!important;
+}
+
+.dateIn{
+    text-align: end;
+    position: relative;
+    top: 7px;
+    right: -8px;
+    font-size: 12px;
+    color: #ddd;
+    width: 100%;
+    border-top: 1px solid #5b5b5b;
+    padding-top: 6px;
+}
+.name-clt span{
+    color: #fff;
+}
+
+.message-notif{
+    position: absolute;
+    background: #03c790;
+    width: 100%;
+    z-index: 1;
+    text-align: center;
+    padding: 20px 0;
+    font-size: 19px;
+    color: #fff;
+}
+
+.sms-content{
+    background: #fdfdfd;
+}
+a.refresh-pg i{
+    position: absolute;
+    right: 21px;
+    color: #adadad!important;
+    top: 24px;
+    font-size: 19px;
+}
+a.refresh-pg:hover i{
+    transition: 0.4s;
+    color: #09d983!important;
+}
+.sym-sms{
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #fdfdfd1a;
+}
+.sym-sms i.in-sms{
+    transform: rotate(45deg);
+    color: #00e97d;
+    position: relative;
+    top: 3px;
+    right: -4px;
+}
+
+.sym-sms i.out-sms{
+    transform: rotate(230deg);
+    color: #39c4fb;
+    position: relative;
+    top: -5px;
+    right: 2px;
+}
+
+.ml-sms{
+    position: absolute;
+    top: 0;
+    right: 27px;
+    border-bottom-left-radius: 10px;
+    z-index: 1;
+    width: 32px;
+}
+.ml-sms i.l-sms{
+    position: relative;
+    color: #00dcff;
+    right: -8px;
+}
+.ml-sms:hover{
+    transition: 0.4s;
+    cursor:pointer;
+    background: #f5f5f529;
+}
+.ml-sms:hover i.l-sms{
+    color: #fdfdfd;
+}
+
+/* ///////////////////////////////////// */
+/* //////////// 404 NOT FOUND ////////// */
+/* ///////////////////////////////////// */
+.bloc-404{
+    display: flex;
+    justify-content: center;
+    padding-top: 30vh;
+    padding-bottom: 33vh;
+}
+
+.bloc-404 div{
+    color: #d5569b;
+    background: white;
+    padding: 5% 13%;
+    border-radius: 36px;
+}
+.bloc-404 h1{
+    color: #e3e3e3;
+}
+
+.bloc-404 h2{
+    margin-bottom: 37px;
+}
+.bloc-404 div a{
+    border: 1px solid #d2579c;
+    padding: 6px 23px 9px;
+    margin-top: 36px;
+    color: #d0589d;
+    border-radius: 7px;
+}
+
+.bloc-404 div a:hover{
+    cursor:pointer;
+    transition: 0.4s;
+    background: linear-gradient(120deg, #a665a6, #db545a)!important;
+    border: 1px solid tranparent;
+    color: #fff;
+    text-decoration: none;
+}
+
+.rl{
+    background:transparent;
+}
+.btn-GU{
+    background: #ff000000;
+    border: none;
+}
+.btn-GU a{
+    position: absolute;
+    bottom: 19px;
+    width: 92%;
+    left: 4%;
+    background: transparent;
+    padding: 15px 0 10px;
+    border-radius: 5px;
+    color: #fff!important;
+    border-top: 1px solid #555555;
+}
+
+.tp-sms-in{
+    position: absolute;
+    top: -4px;
+    font-size: 12px;
+    background: #cf579c;
+    padding: 0 13px;
+    left: 0;
+    border-top-left-radius: 6px;
+    color: white;
+}
+.tp-sms-out{
+    position: absolute;
+    top: -4px;
+    font-size: 12px;
+    background: #1898cb;
+    padding: 0 13px;
+    left: 0;
+    border-top-left-radius: 6px;
+    color: white;
+}
+ul.story .li-inbox{
+    padding-top: 23px!important;
+    padding-bottom: 20px!important;
+}
+ul.inbox .li-inbox{
+    padding: 12px 23px 19px!important;
+}
+ul.inbox li ul.list li .body-sms p{
+    font-size: 14px!important;
+    color: white!important;
+}
+textarea:focus, input:focus, select:focus{
+    outline:none!important;
+    border: 2px solid #2fd93a!important;
+}
+
+li.r-nav-menu_, .left-profil label, ul.contact-list li label, ul.contact-list li label span,
+.title-sc label, .head-left span, form label, .li-inbox label, .li-inbox span, .li-inbox p, .li-inbox div
+.my-number label, .my-number span, .homeInc
+{
+    -moz-user-select: none; 
+    -webkit-user-select: none; 
+    -ms-user-select: none; 
+    user-select: none
+}
+
+.r-nav-menu_5 a{
+    color: #ff7182!important;
+}

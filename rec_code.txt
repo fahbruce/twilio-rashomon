@@ -1,0 +1,16 @@
+<% for(var i=0; i < inbox.length; i++) { %>
+            <% if (inbox[i].direction == "inbound") { %>
+                <li class="clearfix lg-story">
+                  <div class="profil">
+                    <img src="img/profil.png" width="57px">
+                  </div>
+                  <div class="about">
+                    <input type="tel" value='<%= inbox[i].from %>' hidden>
+                    <div class="name"> <%= inbox[i].from %></div>
+                    <div class="status">
+                      <%= inbox[i].body %>
+                    </div>
+                  </div>
+                </li>
+            <% } %>
+         <% } %> 

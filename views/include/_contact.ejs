@@ -1,0 +1,36 @@
+
+<div id="myModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+      <form method="POST" action="api/upload" enctype="multipart/form-data">
+        <div class="content">
+            <span class="close">&times;</span>
+            <!--Importer un fichier.csv-->
+            <input type="file" name="file" id="file" class="inputfile" />
+            <label for="file" class="m-0">Import contacts '.csv'</label>
+        </div>
+        <div class="action-foot">
+            <button type="submit" class="btn btn-info">Ok</button>
+        </div>
+    </form>
+  </div>
+</div>
+
+<button id="myBtn" class="btn btn-info head-contact">Nouveaux contacts</button>
+
+<div class="search">
+    <input id="searchbar" type="text" name="search" placeholder="Rechercher un contact" />
+    <i class="fa fa-search"></i>
+</div>
+
+<div class="content-left">
+    <div id="table_contact"></div>
+    <ul class="file-list-contact" hidden>
+        <% for(var i=0; i < contact.length; i++) { %>
+            <% if (contact[i].idUser == id) { %>
+                <li class="clearfix lg-story filename-contact" value="<%= i %>"><%= contact[i].fileContact %></li>
+            <% } %>
+        <% } %> 
+    </ul>
+</div>
+
