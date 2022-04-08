@@ -10,7 +10,7 @@ module.exports = {
             "user" : "rashomd",
             "host" : "ssh.cluster031.hosting.ovh.net",
             "ref"  : 'origin/main',
-            "repo" : "git@github.com:fahbruce/twilio-rashomon.git",
+            "repo" : "https://github.com/fahbruce/twilio-rashomon.git",
             "path" : "/homez.1709/rashomd/smstwilio",
             'post-deploy' : 'npm install && pm2 reload ecosystem.config.js --eny production',
             //'pre-setup': ''
