@@ -3,19 +3,18 @@ module.exports = {
       name   : "limit worker",
       script : "./server.js",
       args   : "limit",
-      watch  : '.'
     }],
 
     deploy : {
         production : {
-            user : 'user ID',
-            host : 'host ou ip du server',
-            ref  : 'origin/main',
-            repo : 'repository git',
-            path : 'path server où il ya le projet',
+            "user" : "rashomd",
+            "host" : "ftp.cluster031.hosting.ovh.net",
+            "ref"  : 'origin/main',
+            "repo" : "https://github.com/fahbruce/twilio-rashomon.git",
+            "path" : "/homez.1709/rashomd/smstwilio",
             'pre-deploy-local': '',
             'post-deploy' : 'npm install && pm2 reload ecosystem.config.js --eny production',
-            'pre-setup': ''
+            //'pre-setup': ''
         }
     }
   };
