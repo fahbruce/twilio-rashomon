@@ -16,7 +16,7 @@ module.exports = {
             ],
             "ref"  : 'origin/main',
             "repo" : "https://github.com/fahbruce/twilio-rashomon.git",
-            "path" : "/home/rashomr/www",
+            "path" : "/home/rashomr/sms",
             "pre-deploy-local" : "",
             'post-deploy' : 'npm-node14 install && pm2 reload ecosystem.config.js --eny production',
             'pre-setup': ""
