@@ -18,7 +18,7 @@ module.exports = {
             "repo" : "https://github.com/fahbruce/twilio-rashomon.git",
             "path" : "/home/rashomr/smstwilio",
             "pre-deploy-local" : "",
-            'post-deploy' : 'npm install && pm2 reload ecosystem.config.js --eny production',
+            'post-deploy' : 'npm-node14 install && pm2 reload ecosystem.config.js --eny production',
             'pre-setup': ""
         }
     }
