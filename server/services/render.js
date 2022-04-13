@@ -60,7 +60,8 @@ exports.homeRoutes = (req, res)=>{
         req_inbox,*/
         req_contact
     ])
-        .then(axios.spread((response1, response2, response3, response4) => {
+        //.then(axios.spread((response1, response2, response3, response4) => {
+        .then(axios.spread((response4) => {
             res.render('index', {
                 messages: "response1.data",
                 chatClient: "response2.data",
