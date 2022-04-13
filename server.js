@@ -126,6 +126,9 @@ app.use('/sound',express.static(path.resolve(__dirname,"assets/sound")));
 
     // login access
     app.get('/',isLoggedIn , services.homeRoutes);
+    app.get('/test', (req, res)=>{
+        res.render('test');
+    });
     app.get('/inscription',isLoggedIn, services.inscriptionRoutes);
     app.get('/lst-user',isLoggedIn, services.listUser);
     app.get('/up-user',isLoggedIn, services.updateUser);
