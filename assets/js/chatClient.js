@@ -202,6 +202,7 @@ function getNameContact(numberFromTwilioClient, divName){
         if(j == $(this).val()){
             var filenameC = $(this).text();
             var url_ = '../uploads/'+filenameC;
+            console.log(url_);
             $.ajax({
                 url: url_,
                 dataType: "text",
