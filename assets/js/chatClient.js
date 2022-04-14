@@ -537,7 +537,7 @@ function getNameContact(numberFromTwilioClient, divName){
 
   function notifSMS(){
 
-    $.ajax("/api/count-sms-incoming", {
+    $.ajax("https://sms.rashomon-international.com/api/count-sms-incoming", {
       //data: {},
       method: "GET",
       data:{
@@ -658,7 +658,7 @@ var audioElement = document.createElement('audio');
                 telUser: telUser
             },
             enctype: 'multipart/form-data',
-            url: "/api/get-notif",
+            url: "https://sms.rashomon-international.com/api/get-notif",
             success:function(data){
                 const _id = data[0]._id;
                 const _dest = data[0].telDest;
