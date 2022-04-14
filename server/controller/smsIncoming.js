@@ -78,8 +78,6 @@ exports.updateSmsIncoming = (req, res) => {
     const id = req.params.id;
     const status = 0;
 
-    console.log(id);
-
     SmsIncoming.findByIdAndUpdate(id, {status: status}, {useFindAndModify: false})
         .then(data => {
             if(!data){

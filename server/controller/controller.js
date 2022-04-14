@@ -9,21 +9,12 @@ dotenv.config({path:'config.env'});
  * @description Liste des messages filtrés
  */
 exports.findSms = (req, res) => {
-    /*const rec_accountS = req.user.accountS;
-    const rec_authS = req.user.authS;*/
-
     const rec_accountS = process.env.TWILIO_ACCOUNT_SID;
     const rec_authS = process.env.TWILIO_AUTH_TOKEN;
     const client = require('twilio')(rec_accountS, rec_authS);
         
-    client.messages.list(/*{
-        from: _numTel
-        to: _numTel
-        }, */ function(err, data){       
+    client.messages.list(function(err, data){       
              data.forEach(function(message){
-              /*  if(message.to == _numTel){
-                    console.log(message.to);
-                }*/
             });
             return res.send(data); 
         })

@@ -28,35 +28,37 @@
     </div> <!-- end chat -->
     <div class="b-table">
         <div class="b-table_">
-            <table id="customers" class="table">
-                <tr>
-                    <th>ID</th>
-                    <th>Mail</th>
-                    <th>Téléphone</th>
-                    <th>Rôle</th>
-                    <th>Action</th>
-                </tr>
-            <% for(var i=0; i < users.length; i++) { %>
-                <tr class="lg-story">
-                    <td><%= users[i]._id %></td>
-                    <td><%= users[i].email %></td>
-                    <td><%= users[i].tel %></td>
-                    <td>
-                        <% if(users[i].role == "1") { %>
-                            Admin
-                        <% }else{ %>
-                            Utilisateur simple
-                        <% } %>
-                    </td>
-                    <td class="action-list">
-                        <a href="" class="btn-action-lst btn-info">Infos</a>
-                        <a href="/up-user?id=<%= users[i]._id %>" class="btn-action-lst btn-edit">Modifier</a>
-                        <a data-id="<%= users[i]._id %>" class="btn-action-lst btn-delete delete">Supprimer</a>
-                    </td>
-                </tr>
-            <% } %>
-               
-            </table>      
+            <div class="table-user">
+                <table id="customers" class="table">
+                    <tr>
+                        <th>ID</th>
+                        <th>Mail</th>
+                        <th>Téléphone</th>
+                        <th>Rôle</th>
+                        <th>Action</th>
+                    </tr>
+                <% for(var i=0; i < users.length; i++) { %>
+                    <tr class="lg-story">
+                        <td><%= users[i]._id %></td>
+                        <td><%= users[i].email %></td>
+                        <td><%= users[i].tel %></td>
+                        <td>
+                            <% if(users[i].role == "1") { %>
+                                Admin
+                            <% }else{ %>
+                                Utilisateur simple
+                            <% } %>
+                        </td>
+                        <td class="action-list">
+                            <a href="" class="btn-action-lst btn-info">Infos</a>
+                            <a href="/up-user?id=<%= users[i]._id %>" class="btn-action-lst btn-edit">Modifier</a>
+                            <a data-id="<%= users[i]._id %>" class="btn-action-lst btn-delete delete">Supprimer</a>
+                        </td>
+                    </tr>
+                <% } %>
+                   
+                </table> 
+            </div>     
         </div>
     </div>
     

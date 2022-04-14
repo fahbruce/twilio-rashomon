@@ -202,7 +202,6 @@ function getNameContact(numberFromTwilioClient, divName){
         if(j == $(this).val()){
             var filenameC = $(this).text();
             var url_ = '../uploads/'+filenameC;
-            console.log(url_);
             $.ajax({
                 url: url_,
                 dataType: "text",
@@ -414,24 +413,32 @@ function getNameContact(numberFromTwilioClient, divName){
 
             // Button send enable
             $('.btn-send').attr('disabled', false);
+
+            $(".sent-message").append("<div>Message envoyé !</div>");
+            setTimeout(function(){
+              $(".sent-message div").remove()
+            },3000);
+
+            let css_blur =
+            {
+              "-webkit-filter": "blur(0px)",
+              "-moz-filter": "blur(0px)",
+              "-o-filter": "blur(0px)",
+              "-ms-filter": "blur(0px)",
+              "filter": "blur(0px)"
+            }
+          $("#chatSMS").css(css_blur);
         },
-        complete: function(){
-          alert("Message envoyé !");
+        error: function (error) {
+          $(".sent-message").append('<div style="background: #ef000082;color: #ff9f9f;">Message non envoyé !</div>');
+          setTimeout(function(){
+            $(".sent-message div").remove()
+          },3000);
         }
       })
   }
 
   function initialiseResp(){
-    /*$('.chat-content').css({
-      'height': '77vh',
-    })*/
-    //$(".text-sms").css('display','none');
-    /*$('.btn-resp_').css({
-      'display':'block',
-      'margin-left': 'auto',
-      'margin-right': 'auto',
-    });*/
-    //$(".numberTo").val();
     $(".text-sms textarea").val("");
     const numberResp = $('#numberChat').val();
     $(".numberTo").val(numberResp);

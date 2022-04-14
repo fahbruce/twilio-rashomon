@@ -8,6 +8,7 @@
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
+    background: #484848;
 }
   
 #customers td, #customers th {
@@ -30,10 +31,11 @@
     text-align: left;
     background-color: #484848;
     color: #ffffff;
+    background-color: #aa64a0;
 }
 .action-lst{
     position: absolute;
-    right: 104px;
+    right: 19px;
     top: 83px;
 }
 
@@ -193,4 +195,8 @@ a.l-ico-refresh:hover i{
     border-top-right-radius: 12px;
     font-size: 26px;
     color: #b95f8b;
+}
+
+.form-group label i{
+    color: #b3b3b3;
 }

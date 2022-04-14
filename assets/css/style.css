@@ -94,6 +94,7 @@ body {
 .chat .chat-header {
   padding: 20px;
   border-bottom: 2px solid white;
+  position: relative;
 }
 .chat .chat-header img {
   float: left;

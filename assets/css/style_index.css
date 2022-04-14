@@ -181,6 +181,7 @@ body{
     color: white;
     padding: 0 27px 0 9px;
     width: 100%;
+    position: relative;
 }
 .send-form textarea{
    width: 100%;
@@ -555,12 +556,15 @@ li.inc{
 
 div.search{
     position:relative!important;
+    width: 88%;
+    margin: auto;
 }
 #searchbar{
-    margin: 18px 20px;
-    width: 87%;
+    margin: 18px 0;
+    width: 100%;
     padding: 6px 12px;
     border-radius: 8px;
+    left: 0;
 }
 
 #searchbar:focus{
@@ -780,4 +784,12 @@ li.r-nav-menu_, .left-profil label, ul.contact-list li label, ul.contact-list li
 
 .r-nav-menu_5 a{
     color: #ff7182!important;
+}
+
+.sent-message div{
+    position: absolute;
+    bottom: 27px;
+    background: #21d3004d;
+    padding: 2px 18px 4px;
+    color: #8aff4e;
 }
