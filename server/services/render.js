@@ -19,7 +19,7 @@ exports.inscriptionRoutes = (req, res)=>{
 
 exports.listUser = (req, res)=>{
     // make a get request to api/users
-    axios.get('http://sms.rashomon-international.com/api/users')
+    axios.get('https://sms.rashomon-international.com/api/users')
         .then(function(response){
             res.render('listeUser', {users: response.data});
         })
@@ -31,7 +31,7 @@ exports.listUser = (req, res)=>{
 
 exports.updateUser = (req, res)=>{
     // make a get request to api/users
-    axios.get('http://sms.rashomon-international.com/api/users',{params: {id:req.query.id}})
+    axios.get('https://sms.rashomon-international.com/api/users',{params: {id:req.query.id}})
     .then(function(userData){
         res.render('update_', {user: userData.data});
     })
@@ -49,10 +49,10 @@ exports.homeRoutes = (req, res)=>{
     const rec_id = req.user._id;    
     const rec_role = req.user.role;    
 
-    const req_inbox = axios.get('http://sms.rashomon-international.com/api/find-sms-incoming');
-    const req_story = axios.get('http://sms.rashomon-international.com/api/list');
-    const req_chat_client = axios.get('http://sms.rashomon-international.com/api/find-chat-client');
-    const req_contact = axios.get('http://sms.rashomon-international.com/api/find-file');
+    const req_inbox = axios.get('https://sms.rashomon-international.com/api/find-sms-incoming');
+    const req_story = axios.get('https://sms.rashomon-international.com/api/list');
+    const req_chat_client = axios.get('https://sms.rashomon-international.com/api/find-chat-client');
+    const req_contact = axios.get('https://sms.rashomon-international.com/api/find-file');
 
     axios.all([
         req_story,
@@ -76,14 +76,15 @@ exports.homeRoutes = (req, res)=>{
             });
         }))
         .catch(err => {
-            res.send('err');
+            res.send(req_inbox);
+            res.send(req_story);
         })
 }
 
 
 exports.contact = (req, res)=>{
     // make a get request to api/users
-    axios.get('http://sms.rashomon-international.com/api/find-file',{params: {id:req.query.id}})
+    axios.get('https://sms.rashomon-international.com/api/find-file',{params: {id:req.query.id}})
     .then(function(contact){
         res.render('index', {user: contact.data});
     })

@@ -86,7 +86,7 @@ $(document).ready(function(){
         var id = url.split("?id=").pop();
 
         var request = {
-            "url": "http://sms.rashomon-international.com/api/users/"+id,
+            "url": "https://sms.rashomon-international.com/api/users/"+id,
             "method" :"PUT",
             "data": data
         }
@@ -106,7 +106,7 @@ $(document).ready(function(){
         }else if(_password == _cpassword){
             $.ajax(request).done(function(response){
                 alert("Modification réussi!");
-                window.location.href='http://sms.rashomon-international.com/lst-user';
+                window.location.href='https://sms.rashomon-international.com/lst-user';
             })
         }
     })
@@ -119,7 +119,7 @@ $(document).ready(function(){
             var id = $(this).attr('data-id')
 
             var request = {
-                "url": "http://sms.rashomon-international.com/api/users/"+id,
+                "url": "https://sms.rashomon-international.com/api/users/"+id,
                 "method": "DELETE"
             }
 
@@ -127,7 +127,7 @@ $(document).ready(function(){
                 $.ajax(request).done(function(response){
                     alert("Suppression réussi!");
                 })
-                window.location.href='http://sms.rashomon-international.com/lst-user';
+                window.location.href='https://sms.rashomon-international.com/lst-user';
             }
         })
 })
