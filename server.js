@@ -136,7 +136,7 @@ app.use('/sound',express.static(path.resolve(__dirname,"assets/sound")));
     /********************************** */
     /************ Historiques **********/
     /********************************** */
-    app.get('/api/list', (req,res)=>{
+    /*app.get('/api/list', (req,res)=>{
         const rec_accountS = process.env.TWILIO_ACCOUNT_SID;
         const rec_authS = process.env.TWILIO_AUTH_TOKEN;
         const client = require('twilio')(rec_accountS, rec_authS);
@@ -148,7 +148,7 @@ app.use('/sound',express.static(path.resolve(__dirname,"assets/sound")));
              return res.send(data);
         }); 
         return true;          
-    });
+    });*/
 
     app.get('/api/list-ajax', smsIncomingController.findSMSStoryAjax)
 
