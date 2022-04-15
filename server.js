@@ -153,9 +153,8 @@ app.use('/sound',express.static(path.resolve(__dirname,"assets/sound")));
     app.get('/api/list-ajax', smsIncomingController.findSMSStoryAjax)
 
 
-    app.get('/api/find-chat-client',isLoggedIn, controller.findSms)
+    app.get('/api/find-chat-client', controller.findSms)
     
-  //  app.get('/api/contact',isLoggedIn, uploadController.findFile)
     app.get('/api/find-file/', uploadController.findFile)
 
     // function logout
