@@ -436,35 +436,8 @@ app.use((req, res, next) => {
 /********************************** */
 /******* RUN SERVER ********/
 /********************************** */
-const server = app.listen(PORT, () => {
+app.listen(PORT, () => {
     console.log('Server is runins on port 3001');
 });
 
-const io = socket(server);
-
-io.on("connection", function(socket){
-    console.log("made socket connection");
-
-    socket.on("disconnect", function(data){
-        console.log("made socket disconnect");
-    })
-
-    socket.on("send-notification", function(data){
-        io.emit("new-notification", data);
-        //socket.broadcast.emit("new-notification", data);
-    })
-})
-/*
-app.post('/subscribe', (req, res) => {
-    const subscription = req.body;
-    res.status(201).json({})
-   
-    let i = 0;
-    setInterval(() => {
-      const payload = JSON.stringify({ title: `Hello!`, body: i++ });
-      webpush.sendNotification(subscription, payload);
-    }, 500);
-  });
-
-*/
 module.exports = route
