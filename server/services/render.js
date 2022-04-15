@@ -47,21 +47,21 @@ exports.homeRoutes = (req, res)=>{
     const rec_role = req.user.role;    
 
     
-    const req_story = axios.get('https://sms.rashomon-international.com/api/list');
+    /*const req_story = axios.get('https://sms.rashomon-international.com/api/list');
     const req_inbox = axios.get('https://sms.rashomon-international.com/api/find-sms-incoming');
-    const req_contact = axios.get('https://sms.rashomon-international.com/api/find-file');
+    const req_contact = axios.get('https://sms.rashomon-international.com/api/find-file');*/
 
     axios.all([
-        req_story,
+        /*req_story,
         req_inbox,
-        req_contact
+        req_contact*/
     ])
 
-        .then(axios.spread((response1,response2, response3) => {
+        .then(axios.spread((/*response1,response2, response3*/) => {
             res.render('index', {
-                messages: response1.data,
-                inbox: response2.data,
-                contact: response3.data,
+                messages: "response1.data",
+                inbox: "response2.data",
+                contact: "response3.data",
                 tel: rec_my_number,
                 mail: rec_my_mail,
                 id: rec_id,
