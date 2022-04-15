@@ -14,7 +14,7 @@ $(document).ready(function(){
   setInterval(reloadFunction, 3000);
 
   function reloadFunction(){
-    notifSMS();
+    notifSMS(numTelUser);
   }
 
   /**************** Action inbound ********************** */
@@ -534,8 +534,8 @@ function getNameContact(numberFromTwilioClient, divName){
       })
   })
 
-  function notifSMS(){
-    $.ajax("/api/count-sms-incoming/", {
+  function notifSMS(numTelUser){
+    $.ajax("/api/count-sms-incoming", {
       data:{
         numTelUser: numTelUser
       },
@@ -631,7 +631,7 @@ function afterSend(numbertelClt, divName){
 var audioElement = document.createElement('audio');
     audioElement.setAttribute('src', 'sound/sound.mp3');
    
-    setInterval(getNotif,3000);
+    setInterval(getNotif_,3000);
 
     function showNotification(body, title) {
         var options = {
@@ -640,11 +640,14 @@ var audioElement = document.createElement('audio');
        return new Notification(title, options);
     }
 
-    function getNotif(){
-        const telUser = $("#telUser").val();
-        $.ajax("/api/get-notif/",{
+    function getNotif_(){
+      getNotif(numTelUser);
+    }
+
+    function getNotif(numTelUser){
+        $.ajax("/api/get-notif",{
             data: {
-                telUser: telUser
+                telUser: numTelUser
             },
             enctype: 'multipart/form-data',
             success:function(data){
