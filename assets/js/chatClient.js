@@ -398,6 +398,7 @@ function getNameContact(numberFromTwilioClient, divName){
         method: "POST",
         data: {
           numTel: numTel,
+          numTelExp: numTelUser,
           messageContent: messageContent
         },
         success: function(data){

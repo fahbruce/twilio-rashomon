@@ -183,7 +183,7 @@ app.use('/sound',express.static(path.resolve(__dirname,"assets/sound")));
 /********************************** */
 /******* API Send SMS twilio ********/
 /********************************** */
-app.post('/api/sendSms',isLoggedIn, (req,res)=>{
+app.post('/api/sendSms', (req,res)=>{
     /********************************** */
     /* Access && token du compte twilio */
     /********************************** */
@@ -196,7 +196,7 @@ app.post('/api/sendSms',isLoggedIn, (req,res)=>{
     }
 
     const number = req.body.numTel;
-    const numberExp = req.user.tel;
+    const numberExp = req.body.numTelExp;
     const messageC = req.body.messageContent;
 
     const rec_accountS = process.env.TWILIO_ACCOUNT_SID;
