@@ -538,10 +538,7 @@ function getNameContact(numberFromTwilioClient, divName){
   })
 
   function notifSMS(){
-
-    $.ajax("https://sms.rashomon-international.com/api/count-sms-incoming", {
-      //data: {},
-      method: "GET",
+    $.ajax("/api/count-sms-incoming/", {
       data:{
         numTelUser: numTelUser
       },
@@ -654,13 +651,11 @@ var audioElement = document.createElement('audio');
 
     function getNotif(){
         const telUser = $("#telUser").val();
-        $.ajax({
-            type:'GET',
+        $.ajax("/api/get-notif/",{
             data: {
                 telUser: telUser
             },
             enctype: 'multipart/form-data',
-            url: "https://sms.rashomon-international.com/api/get-notif",
             success:function(data){
                 const _id = data[0]._id;
                 const _dest = data[0].telDest;
