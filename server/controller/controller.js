@@ -4,7 +4,6 @@ const route = express.Router();
 const dotenv = require('dotenv');
 dotenv.config({path:'config.env'});
 
-
 /**
  * @description Liste des messages filtrés
  */
