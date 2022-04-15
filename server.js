@@ -271,7 +271,7 @@ app.post('/api/upload', (req, res) => {
 /******************************************* */
 app.get('/api/find-sms-incoming/', smsIncomingController.findSMSIncoming)
 app.get('/api/find-sms-incoming-ajax/', smsIncomingController.findSMSIncomingAjax)
-//app.get('/api/count-sms-incoming/', smsIncomingController.countSMSIncoming)
+app.get('/api/count-sms-incoming/', smsIncomingController.countSMSIncoming)
 
 
 app.post('/api/sms-incoming', (req, res) => {
@@ -383,7 +383,7 @@ app.post('/api/sms-incoming', (req, res) => {
 
 app.put('/api/up-sms-incoming/:id', smsIncomingController.updateSmsIncoming)
 
-/*app.get('/api/get-notif', (req, res) => {
+app.get('/api/get-notif', (req, res) => {
     const idT = req.query.telUser;
 
     NotifSMS.find({"telDest": idT})
@@ -401,7 +401,7 @@ app.put('/api/up-sms-incoming/:id', smsIncomingController.updateSmsIncoming)
             message: "Erreur lors de la récupération de l'utilisateur avec l'identifiant :" + id
         })
     })
-})*/
+})
 
 app.put('/api/up-notif/:id', (req, res) => {
     const id = req.params.id;
