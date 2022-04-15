@@ -14,7 +14,7 @@ $(document).ready(function(){
   setInterval(reloadFunction, 3000);
 
   function reloadFunction(){
-    notifSMS();
+    //notifSMS();
   }
 
   /**************** Action inbound ********************** */
@@ -641,7 +641,7 @@ function afterSend(numbertelClt, divName){
 var audioElement = document.createElement('audio');
     audioElement.setAttribute('src', 'sound/sound.mp3');
    
-    setInterval(getNotif,3000);
+    //setInterval(getNotif,3000);
 
     function showNotification(body, title) {
         var options = {
