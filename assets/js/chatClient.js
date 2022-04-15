@@ -127,7 +127,6 @@ function getSMSInbound(){
  function getSMSInStory(){
   const numTelUser = $("#telUser").val(); 
    $.ajax("/api/list-ajax/", {
-    method: "GET",
     data: {
       numTelUser: numTelUser,
     },
