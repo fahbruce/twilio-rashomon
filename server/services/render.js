@@ -62,7 +62,7 @@ exports.homeRoutes = (req, res)=>{
         .then(axios.spread((response4) => {
             res.render('index', {
                 messages: "response1.data",
-                chatClient: response2.data,
+                chatClient: "response2.data",
                 inbox: "response3.data",
                 contact: response4.data,
                 tel: rec_my_number,
