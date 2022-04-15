@@ -20,7 +20,6 @@ $(document).ready(function(){
   /**************** Action inbound ********************** */
 
   getSMSInbound();
-  getSMSInStory();
   
   /**
   * GET SMS JS TO INBOUND
@@ -134,7 +133,7 @@ function getSMSInbound(){
       // Supprimer la liste des messages
      $('ul.story li ul.list li').remove();
       // Rechercher les messages du twilio à l'aide d'une bloucle
-      $.each(data.reverse(), function(key, val){
+      $.each(data, function(key, val){
         // Ajouter la liste des messages
         const numberFromTwilio = val.from;
           if(val.direction == "inbound"){
@@ -146,7 +145,7 @@ function getSMSInbound(){
 
              var dateSMS = date + " " + time;
             //$('ul.story li ul.list').prepend('<li class="clearfix li-inbox li-inbox'+key+'" title="'+val.messageIn+'"><div class="sym-sms"><i class="fa fa-arrow-down in-sms" title="Entrant"></i></div><div class="profil"><img src="img/profil.png" width="57px"></div><div class="about"><input type="tel" value='+ val.telExp +' hidden> <!--hidden--><div class="name-clt"><span></span></div><div class="status">'+ val.telExp +'</div><div class="dateIn"> '+dateSMS+'</div></div></li>');
-            $('ul.story li ul.list').prepend('<li class="clearfix lg-story li-inbox li-inbox'+key+'" title="'+val.body+'"><div class="tp-sms-in"><span>Client</span></div><div class="sym-sms"><i class="fa fa-arrow-down in-sms" title="Entrant"></i></div><div class="profil"><img src="img/profil.png" width="57px"></div><div class="about"><input type="tel" value="'+val.from+'" hidden> <!--hidden--><div class="name-clt"><span></span></div><div class="status">'+val.from+'</div><div class="dateIn">'+dateSMS+'</div></li>');
+            $('ul.story li ul.list').append('<li class="clearfix lg-story li-inbox li-inbox'+key+'" title="'+val.body+'"><div class="tp-sms-in"><span>Client</span></div><div class="sym-sms"><i class="fa fa-arrow-down in-sms" title="Entrant"></i></div><div class="profil"><img src="img/profil.png" width="57px"></div><div class="about"><input type="tel" value="'+val.from+'" hidden> <!--hidden--><div class="name-clt"><span></span></div><div class="status">'+val.from+'</div><div class="dateIn">'+dateSMS+'</div></li>');
             $("ul.story li ul.list li.li-inbox"+key).on('click', function(){
                 const numbertelClt = $(this).find('input[type=tel]').val();
                 const divName_ = $(this).find(".name-clt").find("span").text();
@@ -163,7 +162,7 @@ function getSMSInbound(){
              var time = d.toLocaleTimeString().toLowerCase();
 
              var dateSMS = date + " " + time;
-            $('ul.story li ul.list').prepend('<li class="clearfix lg-story li-inbox li-inbox'+key+'" title="'+val.body+'"><div class="tp-sms-out"><span>Vous</span></div><div class="sym-sms"><i class="fa fa-arrow-down out-sms" title="Sortant"></i></div><div class="profil"><img src="img/profil.png" width="57px"></div><div class="about"><input type="tel" value="'+val.from+'" hidden> <!--hidden--><div class="name-clt"><span></span></div><div class="status">'+val.from+'</div><div class="dateIn">'+dateSMS+'</div></div></li>');
+            $('ul.story li ul.list').append('<li class="clearfix lg-story li-inbox li-inbox'+key+'" title="'+val.body+'"><div class="tp-sms-out"><span>Vous</span></div><div class="sym-sms"><i class="fa fa-arrow-down out-sms" title="Sortant"></i></div><div class="profil"><img src="img/profil.png" width="57px"></div><div class="about"><input type="tel" value="'+val.from+'" hidden> <!--hidden--><div class="name-clt"><span></span></div><div class="status">'+val.from+'</div><div class="dateIn">'+dateSMS+'</div></div></li>');
             $("ul.story li ul.list li.li-inbox"+key).on('click', function(){
               const numbertelClt = $(this).find('input[type=tel]').val();
               const divName_ = $(this).find(".name-clt").find("span").text();
@@ -325,7 +324,7 @@ function getNameContact(numberFromTwilioClient, divName){
 
   function getSMS(numTel){
       // Suppression le contenu du corps chat
-      $("#chatSMS ul").remove();     
+      $("#chatSMS div ul").remove();     
 
       $.ajax("/api/find-chat-client", {
         data: {numTel: numTel},
@@ -333,7 +332,7 @@ function getNameContact(numberFromTwilioClient, divName){
           var countSMS = data.length;
           $('.m-profile').css('display','none');
           
-          $.each(data.reverse(), function(key, val){
+          $.each(data, function(key, val){
               if(val.to == numTel || val.from == numTel){
                 /** 
                  * Format date 
@@ -347,7 +346,7 @@ function getNameContact(numberFromTwilioClient, divName){
                 var dateSMS = date + " " + time;
                 
                // $('#chatSMS').append("<ul class="+ val.direction+ "><li class=\"clearfix\"><div class=\"message-data align-right\"><span class=\"message-data-time\" >" + dateSMS + "</span> &nbsp; &nbsp;<span class=\"message-data-name\" >" + val.to + "</span> <i class=\"fa fa-circle me\"></i></div><div class=\"message other-message float-right\">" + val.body + "</div></li></ul>");  
-                $('#chatSMS').append('<ul class="'+ val.direction +'"><li class="clearfix"><div class="message-data align-right"><span class="message-data-time" >'+ dateSMS +'</span></div><div class="message other-message float-right"><span>'+ val.body +'</span></div></li></ul>');  
+                $('#chatSMS div.chat-content_').prepend('<ul class="'+ val.direction +'"><li class="clearfix"><div class="message-data align-right"><span class="message-data-time" >'+ dateSMS +'</span></div><div class="message other-message float-right"><span>'+ val.body +'</span></div></li></ul>');  
                
               }
           })
@@ -393,8 +392,7 @@ function getNameContact(numberFromTwilioClient, divName){
       $('#number').val(numTelClt);
       var numTel = $('#numberChat').val();
 
-     // $('#chatSMS').appendTo('<ul class="outbound-api"><li class="clearfix"><div class="message-data align-right"><span class="message-data-time" >12:00</span></div><div class="message other-message float-right"><span>'+ messageContent +'</span></div><div class=""><span>Envoi...</span></div></li></ul>');  
-    
+     
       // ajax SEND
       $.ajax("/api/sendSms", {
         method: "POST",
@@ -548,13 +546,7 @@ function getNameContact(numberFromTwilioClient, divName){
         if(data.length == 0){
           $(".notif-sms").append("<span>0</span>");
         }else{
-          $.each(data.reverse(), function(key, val){
-            /*if(val.telDest == numTelUser && val.status == 1){
-              tab.push(val);
-              count = tab.length;
-            }else{
-              count = 0;
-            }*/
+          $.each(data, function(key, val){
             tab.push(val);
             count = tab.length;
           })
