@@ -109,7 +109,10 @@ exports.updateSmsIncoming = (req, res) => {
         data.forEach(function(message){
            //console.log(message);
         });
-         return res.send(data);
+        const twiml = new MessagingResponse();
+        res.setHeader('Content-Type', 'text/xml');
+        res.end(twiml.toString());
+        return res.send(data);
     }); 
     return true;  
   } 

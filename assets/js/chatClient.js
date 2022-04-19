@@ -20,6 +20,7 @@ $(document).ready(function(){
   /**************** Action inbound ********************** */
 
   getSMSInbound();
+  getSMSInStory();
   
   /**
   * GET SMS JS TO INBOUND
