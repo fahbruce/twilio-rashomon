@@ -429,7 +429,7 @@ function getNameContact(numberFromTwilioClient, divName){
             }
           $("#chatSMS").css(css_blur);
         },
-        error: function (error) {
+        error: function (error) { 
           $(".sent-message").append('<div style="background: #ef000082;color: #ff9f9f;">Message non envoyé !</div>');
           setTimeout(function(){
             $(".sent-message div").remove()

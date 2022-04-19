@@ -436,7 +436,7 @@ app.use((req, res, next) => {
 /******* RUN SERVER ********/
 /********************************** */
 app.listen(PORT, () => {
-    console.log('Server is runins on port 5000');
+    console.log('Server is runins on port 80');
 });
 
 
