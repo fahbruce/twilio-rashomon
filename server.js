@@ -212,11 +212,18 @@ app.post('/api/sendSms', (req,res)=>{
                 to: number
             })
             .then(message => console.log(message.body));
-            return res.redirect('/');
+            const twiml = new MessagingResponse();
+            res.setHeader('Content-Type', 'text/xml');
+            res.end(twiml.toString());
+            //return res.redirect('/');
     }else{
         console.log("Veuillez remplir les champs nécessaires");
-        return res.redirect('/');
+        const twiml = new MessagingResponse();
+        res.setHeader('Content-Type', 'text/xml');
+        res.end(twiml.toString());
+        //return res.redirect('/');
     }
+
 })
 
 
