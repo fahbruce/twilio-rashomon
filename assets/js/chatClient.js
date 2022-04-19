@@ -20,7 +20,7 @@ $(document).ready(function(){
   /**************** Action inbound ********************** */
 
   getSMSInbound();
-  getSMSInStory();
+  //getSMSInStory();
   
   /**
   * GET SMS JS TO INBOUND
@@ -131,12 +131,14 @@ function getSMSInbound(){
       numTelUser: numTelUser,
     },
     success: function(data){
+      console.log(data);
       // Supprimer la liste des messages
      $('ul.story li ul.list li').remove();
       // Rechercher les messages du twilio à l'aide d'une bloucle
       $.each(data, function(key, val){
         // Ajouter la liste des messages
-        const numberFromTwilio = val.from;
+        const numberFromTwilio = val;
+        
           if(val.direction == "inbound"){
              var d = new Date(val.dateSent);
              var month = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
@@ -460,7 +462,7 @@ function getNameContact(numberFromTwilioClient, divName){
       showLoading();
       sendNewSMS(numTelClt);
       afterSend(numTelClt, divName);
-      getSMSInStory();
+     // getSMSInStory();
   })
 
   /**
@@ -480,7 +482,7 @@ function getNameContact(numberFromTwilioClient, divName){
     showLoading();
     sendNewSMS(numbertelClt);
     afterSend(numbertelClt, divName);
-    getSMSInStory();
+    //getSMSInStory();
   })
 
 
@@ -669,7 +671,7 @@ var audioElement = document.createElement('audio');
                             showLoading();
                             getSMS(_exp);
                             getSMSInbound();
-                            getSMSInStory();
+                            //getSMSInStory();
                             showNotification(_message, _dest);
                             
                         }else if (Notification.permission!== "denied"){
@@ -680,7 +682,7 @@ var audioElement = document.createElement('audio');
                                     showLoading();
                                     getSMS(_exp);
                                     getSMSInbound();
-                                    getSMSInStory();
+                                   // getSMSInStory();
                                     showNotification(_message, _dest);
                                 }
                             });
