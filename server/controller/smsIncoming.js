@@ -107,14 +107,13 @@ exports.updateSmsIncoming = (req, res) => {
     const client = require('twilio')(rec_accountS, rec_authS);
 
     const twiml = new MessagingResponse();
+    res.setHeader('Content-Type', 'text/xml');
 
     client.messages.list(function(err, data) {
         data.forEach(function(message){
            //console.log(message);
         });
-        res.setHeader('Content-Type', 'text/xml');
-        res.send(data);
-        return data;
+        return res.send(data);
     }); 
     return true;
   } 

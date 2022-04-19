@@ -20,7 +20,7 @@ $(document).ready(function(){
   /**************** Action inbound ********************** */
 
   getSMSInbound();
-  //getSMSInStory();
+  getSMSInStory();
   
   /**
   * GET SMS JS TO INBOUND
@@ -34,7 +34,6 @@ function getSMSInbound(){
     success: function(data){
       // Supprimer la liste des messages
      $('ul.inbox li ul.list li').remove();
-
       // Rechercher les messages Inbound à l'aide d'une bloucle
       $.each(data, function(key, val){
         // Ajouter la liste des messages
@@ -126,7 +125,7 @@ function getSMSInbound(){
   */
  function getSMSInStory(){
   const numTelUser = $("#telUser").val(); 
-   $.ajax("/api/list-ajax/", {
+   $.ajax("/api/list-ajax", {
     data: {
       numTelUser: numTelUser,
     },
