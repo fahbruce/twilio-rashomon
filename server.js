@@ -33,7 +33,7 @@ const MessagingResponse = require('twilio').twiml.MessagingResponse;
 
 
 dotenv.config({path:'config.env'});
-const PORT = process.env.PORT || 80;
+const PORT = process.env.PORT || 8080;
 
 const upload = require('express-fileupload');
 
@@ -42,9 +42,9 @@ const upload = require('express-fileupload');
 /********************************** */
 const webpush = require('web-push');
 
-/*const publicVapidKey = process.env.PUBLIC_VAPID_KEY;
+const publicVapidKey = process.env.PUBLIC_VAPID_KEY;
 const privateVapidKey = process.env.PRIVATE_VAPID_KEY;
-webpush.setVapidDetails('mailto:nt.peronnel@gmail.com', publicVapidKey, privateVapidKey);*/
+webpush.setVapidDetails('mailto:nt.peronnel@gmail.com', publicVapidKey, privateVapidKey);
 
 
 const app = express();
@@ -142,11 +142,10 @@ app.use('/sound',express.static(path.resolve(__dirname,"assets/sound")));
         const client = require('twilio')(rec_accountS, rec_authS);
 
         client.messages.list(function(err, data) {
+            res.setHeader('Content-Type', 'application/json; charset=utf-8');
             const jsonContent = JSON.stringify(data);
-            return res.send(jsonContent);
-        }).then(
-            res.setHeader('Content-Type', 'application/json; charset=utf-8')
-        );
+            return res.send(data);
+        }); 
         return true;          
     });
 

@@ -18,5 +18,6 @@ exports.findSms = (req, res) => {
             return res.send(data); 
         })
         .then(messages => messages.forEach(/*m => console.log(m.sid)*/));
+
     return true;
 } 
