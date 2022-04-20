@@ -142,10 +142,9 @@ app.use('/sound',express.static(path.resolve(__dirname,"assets/sound")));
         const client = require('twilio')(rec_accountS, rec_authS);
 
         client.messages.list(function(err, data) {
-            data.forEach(function(message){
-               //console.log(message);
-            });
-             return res.send(data);
+            res.setHeader('Content-Type', 'application/json');
+            const jsonContent = JSON.stringify(data);
+            return res.end(jsonContent);
         }); 
         return true;          
     });
