@@ -126,9 +126,6 @@ function getSMSInbound(){
  function getSMSInStory(){
   const numTelUser = $("#telUser").val(); 
    $.ajax("/api/list-ajax", {
-    data: {
-      numTelUser: numTelUser,
-    },
     success: function(data){
       // Supprimer la liste des messages
      $('ul.story li ul.list li').remove();

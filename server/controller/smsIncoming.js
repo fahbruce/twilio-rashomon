@@ -4,6 +4,8 @@ var SmsIncoming = require('../model/model_smsIncoming');
 const MessagingResponse = require('twilio').twiml.MessagingResponse;
 const app = express();
 
+const dotenv = require('dotenv');
+
 /**
  * @description Liste des SMS INCOMING
  */
@@ -100,17 +102,15 @@ exports.updateSmsIncoming = (req, res) => {
  * @description Liste des SMS INCOMING IN AJAX
  */
  exports.findSMSStoryAjax = (req, res) => {
-
-    var rec_telUser = req.query.numTelUser;
     const rec_accountS = process.env.TWILIO_ACCOUNT_SID;
     const rec_authS = process.env.TWILIO_AUTH_TOKEN;
     const client = require('twilio')(rec_accountS, rec_authS);
     
     client.messages.list(function(err, data) {
-        res.setHeader('Content-Type', 'application/json');
+        res.setHeader('Content-Type', 'application/json; charset=utf-8');
         const jsonContent = JSON.stringify(data);
-        return res.send(jsonContent);
+        return res.send(data);
     });
     
-    return true;
+    
   } 
