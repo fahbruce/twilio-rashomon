@@ -106,16 +106,14 @@ exports.updateSmsIncoming = (req, res) => {
     const rec_authS = process.env.TWILIO_AUTH_TOKEN;
     const client = require('twilio')(rec_accountS, rec_authS);
 
-    
-
     client.messages.list(function(err, data) {
-        data.forEach(function(message){
+       /* data.forEach(function(message){
            //console.log(message);
-        });
-        //res.send(data);
+        });*/
+        res.setHeader('Content-Type', 'text/xml');
+        return res.send(data);
+        //return data;
     });
-    const twiml = new MessagingResponse();
-    res.setHeader('Content-Type', 'text/xml');
-    res.end(twiml.toString());
+    
     return true;
   } 
