@@ -105,14 +105,11 @@ exports.updateSmsIncoming = (req, res) => {
     const rec_accountS = process.env.TWILIO_ACCOUNT_SID;
     const rec_authS = process.env.TWILIO_AUTH_TOKEN;
     const client = require('twilio')(rec_accountS, rec_authS);
-
+    
     client.messages.list(function(err, data) {
-       /* data.forEach(function(message){
-           //console.log(message);
-        });*/
-        res.setHeader('Content-Type', 'text/xml');
-        return res.send(data);
-        //return data;
+        res.setHeader('Content-Type', 'application/json');
+        const jsonContent = JSON.stringify(data);
+        return res.end(jsonContent);
     });
     
     return true;

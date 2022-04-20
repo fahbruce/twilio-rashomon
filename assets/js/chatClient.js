@@ -130,22 +130,22 @@ function getSMSInbound(){
       numTelUser: numTelUser,
     },
     success: function(data){
-      console.log(data);
       // Supprimer la liste des messages
      $('ul.story li ul.list li').remove();
       // Rechercher les messages du twilio à l'aide d'une bloucle
       $.each(data, function(key, val){
-        // Ajouter la liste des messages
-        const numberFromTwilio = val;
-        
-          if(val.direction == "inbound"){
-             var d = new Date(val.dateSent);
-             var month = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+        // Numéro des client dans twilio
+        const numberFromTwilio = val.from;
+       
+        if(val.from == numTelUser || val.to == numTelUser){
+            if(val.direction == "inbound"){
+              var d = new Date(val.dateSent);
+              var month = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
 
-             var date = d.getDate() + " " + month[d.getMonth()] + " " + d.getFullYear();
-             var time = d.toLocaleTimeString().toLowerCase();
+              var date = d.getDate() + " " + month[d.getMonth()] + " " + d.getFullYear();
+              var time = d.toLocaleTimeString().toLowerCase();
 
-             var dateSMS = date + " " + time;
+              var dateSMS = date + " " + time;
             //$('ul.story li ul.list').prepend('<li class="clearfix li-inbox li-inbox'+key+'" title="'+val.messageIn+'"><div class="sym-sms"><i class="fa fa-arrow-down in-sms" title="Entrant"></i></div><div class="profil"><img src="img/profil.png" width="57px"></div><div class="about"><input type="tel" value='+ val.telExp +' hidden> <!--hidden--><div class="name-clt"><span></span></div><div class="status">'+ val.telExp +'</div><div class="dateIn"> '+dateSMS+'</div></div></li>');
             $('ul.story li ul.list').append('<li class="clearfix lg-story li-inbox li-inbox'+key+'" title="'+val.body+'"><div class="tp-sms-in"><span>Client</span></div><div class="sym-sms"><i class="fa fa-arrow-down in-sms" title="Entrant"></i></div><div class="profil"><img src="img/profil.png" width="57px"></div><div class="about"><input type="tel" value="'+val.from+'" hidden> <!--hidden--><div class="name-clt"><span></span></div><div class="status">'+val.from+'</div><div class="dateIn">'+dateSMS+'</div></li>');
             $("ul.story li ul.list li.li-inbox"+key).on('click', function(){
@@ -153,27 +153,28 @@ function getSMSInbound(){
                 const divName_ = $(this).find(".name-clt").find("span").text();
                 clickList(numbertelClt, divName_);
                 answerInitHide();
-             });
-             const divName = $("ul.story li ul.list li.li-inbox"+key).find(".name-clt");
-             getNameContact(numberFromTwilio, divName);
+              });
+              const divName = $("ul.story li ul.list li.li-inbox"+key).find(".name-clt");
+              getNameContact(numberFromTwilio, divName);
           }else{
-             var d = new Date(val.dateSent);
+              var d = new Date(val.dateSent);
               var month = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
 
-             var date = d.getDate() + " " + month[d.getMonth()] + " " + d.getFullYear();
-             var time = d.toLocaleTimeString().toLowerCase();
+              var date = d.getDate() + " " + month[d.getMonth()] + " " + d.getFullYear();
+              var time = d.toLocaleTimeString().toLowerCase();
 
-             var dateSMS = date + " " + time;
+              var dateSMS = date + " " + time;
             $('ul.story li ul.list').append('<li class="clearfix lg-story li-inbox li-inbox'+key+'" title="'+val.body+'"><div class="tp-sms-out"><span>Vous</span></div><div class="sym-sms"><i class="fa fa-arrow-down out-sms" title="Sortant"></i></div><div class="profil"><img src="img/profil.png" width="57px"></div><div class="about"><input type="tel" value="'+val.from+'" hidden> <!--hidden--><div class="name-clt"><span></span></div><div class="status">'+val.from+'</div><div class="dateIn">'+dateSMS+'</div></div></li>');
             $("ul.story li ul.list li.li-inbox"+key).on('click', function(){
               const numbertelClt = $(this).find('input[type=tel]').val();
               const divName_ = $(this).find(".name-clt").find("span").text();
               clickList(numbertelClt, divName_);
               answerInitHide();
-           });
-           const divName = $("ul.story li ul.list li.li-inbox"+key).find(".name-clt");
-           getNameContact(numberFromTwilio, divName);
+            });
+            const divName = $("ul.story li ul.list li.li-inbox"+key).find(".name-clt");
+            getNameContact(numberFromTwilio, divName);
           }
+        }
       })
     }
   })
@@ -196,7 +197,8 @@ $("ul.story li ul.list li").each(function() {
 ////////////////////////////////////////////////////
 ////////////// GET Nom contact CSV /////////////////
 ////////////////////////////////////////////////////
-function getNameContact(numberFromTwilioClient, divName){
+function 
+getNameContact(numberFromTwilioClient, divName){
   $("ul li.filename-contact").each(function() {
     var j = 0;
     const lengthLiFile = $("ul li.filename-contact").length;
@@ -213,13 +215,12 @@ function getNameContact(numberFromTwilioClient, divName){
                    
                      // boucle de recuperation contenu CSV
                          for(var i = 0; i < myNewContactJSON.length; i++){
-                          const numberFromCSV = "+"+myNewContactJSON[i].Contact;
+                            const numberFromCSV = "+"+myNewContactJSON[i].Contact;
                             if(numberFromCSV == numberFromTwilioClient){
                               //divName.find('span').remove();
                               divName.html('<span>' + myNewContactJSON[i].Nom + ' ' + myNewContactJSON[i].Prenom + '</span>');
                               console.log(myNewContactJSON[i].Nom + ' tel : ' + numberFromTwilioClient + 'ou' + numberFromCSV);
                             }
-                             
                          }
                      // Fin boucle de recuperation contenu CSV
                 }
