@@ -136,7 +136,7 @@ function getSMSInbound(){
       $.each(data, function(key, val){
         // Numéro des client dans twilio
         const numberFromTwilio = val.from;
-       
+       console.log(numberFromTwilio);
         if(val.from == numTelUser || val.to == numTelUser){
             if(val.direction == "inbound"){
               var d = new Date(val.dateSent);
