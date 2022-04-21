@@ -325,6 +325,7 @@ getNameContact(numberFromTwilioClient, divName){
   function getSMS(numTel){
       // Suppression le contenu du corps chat
       $("#chatSMS div ul").remove();     
+      $(".bl-load").append('<div class="loading" style="height:81%;"><div class="lds-ellipsis">Chargement ...</div></div>');
 
       $.ajax("/api/find-chat-client", {
         data: {numTel: numTel},
@@ -350,6 +351,7 @@ getNameContact(numberFromTwilioClient, divName){
                
               }
           })
+          $(".bl-load div.loading").remove();
         },
         complete: function(){
           hideLoading();
@@ -487,11 +489,11 @@ getNameContact(numberFromTwilioClient, divName){
   * Action answer SMS JS
   */
  $(".answer-sms").on('click', function(){
-    // Button send disable
-    $(this).attr('disabled', true);
+      // Button send disable
+      $(this).attr('disabled', true);
 
-    showEnvoi();
-
+      showEnvoi();
+      
       var numTelClt = $('.form-answer .numberTo').val();
       var messageContentAs = $('#messageContentAs').val();
       
@@ -512,6 +514,7 @@ getNameContact(numberFromTwilioClient, divName){
         method: "POST",
         data: {
           numTel: numTel,
+          numTelExp: numTelUser,
           messageContent: messageContentAs
         },
         success: function(data){
@@ -620,16 +623,11 @@ function afterSend(numbertelClt, divName){
 
     $('.my-number label span').remove();
     $('.my-number label.nameExp').append('<span><b>Nom : </b> ' + divName + '</span>');
-
-  // $("ul.inbox li ul.list li.li-inbox").on("click", function(){
-
-    // Affecter le numéro de téléphone dans l'input caché
-    //$('form.form-answer #number').val(numTelClt);
-
+    
     var numTel = $('#numberChat').val();
 }
 
-var audioElement = document.createElement('audio');
+    var audioElement = document.createElement('audio');
     audioElement.setAttribute('src', 'sound/sound.mp3');
    
     setInterval(getNotif_,3000);
@@ -665,7 +663,7 @@ var audioElement = document.createElement('audio');
                         //console.log("notification " + [i]);
                         if(Notification.permission === "granted"){
                             audioElement.play();
-                            showLoading();
+                            //showLoading();
                             getSMS(_exp);
                             getSMSInbound();
                             //getSMSInStory();
@@ -676,7 +674,7 @@ var audioElement = document.createElement('audio');
                             Notification.requestPermission().then(permission => {
                                 if(permission === "granted") {
                                     audioElement.play();
-                                    showLoading();
+                                   // showLoading();
                                     getSMS(_exp);
                                     getSMSInbound();
                                    // getSMSInStory();

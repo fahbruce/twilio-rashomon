@@ -144,9 +144,8 @@ app.use('/sound',express.static(path.resolve(__dirname,"assets/sound")));
         client.messages.list(function(err, data) {
             res.setHeader('Content-Type', 'application/json; charset=utf-8');
             const jsonContent = JSON.stringify(data);
-            return res.send(data);
-        }); 
-        return true;          
+            return res.send(jsonContent);
+        });          
     });
 
     app.get('/api/list-ajax', smsIncomingController.findSMSStoryAjax)
@@ -202,6 +201,8 @@ app.post('/api/sendSms', (req,res)=>{
     const rec_authS = process.env.TWILIO_AUTH_TOKEN;
 
     const client = require('twilio')(rec_accountS, rec_authS);
+
+    console.log(numberExp);
 
    if(number!= "" && messageC!="" ){
         client.messages

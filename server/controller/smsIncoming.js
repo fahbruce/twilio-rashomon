@@ -109,7 +109,7 @@ exports.updateSmsIncoming = (req, res) => {
    client.messages.list(function(err, data) {
         res.setHeader('Content-Type', 'application/json; charset=utf-8');
         const jsonContent = JSON.stringify(data);
-        return res.send(data);
+        return res.send(jsonContent);
     });
     
   } 

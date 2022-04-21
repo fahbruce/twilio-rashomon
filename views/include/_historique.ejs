@@ -1,7 +1,41 @@
 <ul class="story overflow">
   <li>
     <ul class="list">
-     
+<% for(var i=0; i < messages.length; i++) { %>
+          <% if (messages[i].direction == "inbound") { %>
+            <li class="clearfix lg-story li-inbox" title="<%= messages[i].body %>">
+              <div class="tp-sms-in"><span>Client</span></div>
+              <div class="sym-sms"><i class="fa fa-arrow-down in-sms" title="Entrant"></i></div>
+              <div class="profil">
+                <img src="img/profil.png" width="57px">
+              </div>
+              <div class="about">
+                <input type="tel" value='<%= messages[i].from %>' hidden> <!--hidden-->
+                <div class="name-clt"><span></span></div>
+                <div class="status">
+                   <%= messages[i].from %>
+                </div>
+                <div class="dateIn"> <%= moment(messages[i].dateSent).format('DD MMMM YYYY HH:mm:ss')  %></div>
+              </div>
+            </li>
+          <% } else { %>
+            <li class="clearfix lg-story li-inbox" title="<%= messages[i].body %>">
+              <div class="tp-sms-out"><span>Vous</span></div>
+              <div class="sym-sms"><i class="fa fa-arrow-down out-sms" title="Sortant"></i></div>
+              <div class="profil">
+                <img src="img/profil.png" width="57px">
+              </div>
+              <div class="about">
+                <input type="tel" value='<%= messages[i].to %>' hidden> <!--hidden-->
+                <div class="name-clt"><span></span></div>
+                <div class="status">
+                   <%= messages[i].to %>
+                </div>
+                <div class="dateIn"> <%= moment(messages[i].dateSent).format('DD MMMM YYYY HH:mm:ss')  %></div>
+              </div>
+            </li>
+          <% } %>
+       <% } %> 
     </ul>
     <!--<div class="contentStorySMS"></div>-->
   </li>
