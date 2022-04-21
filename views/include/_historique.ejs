@@ -1,7 +1,7 @@
 <ul class="story overflow">
   <li>
     <ul class="list">
-<% for(var i=0; i < messages.length; i++) { %>
+        <% for(var i=0; i < messages.length; i++) { %>
           <% if (messages[i].direction == "inbound") { %>
             <li class="clearfix lg-story li-inbox" title="<%= messages[i].body %>">
               <div class="tp-sms-in"><span>Client</span></div>

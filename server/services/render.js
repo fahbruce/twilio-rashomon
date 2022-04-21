@@ -47,7 +47,7 @@ exports.homeRoutes = (req, res)=>{
     const rec_role = req.user.role;    
 
     
-    const req_story = axios.get('http://localhost:80/api/list');
+    const req_story = axios.get('http://sms.rashomon-international.com/api/list');
     const req_inbox = axios.get('http://sms.rashomon-international.com/api/find-sms-incoming');
     const req_contact = axios.get('http://sms.rashomon-international.com/api/find-file');
 
