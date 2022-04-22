@@ -142,7 +142,7 @@ app.use('/sound',express.static(path.resolve(__dirname,"assets/sound")));
         const client = require('twilio')(rec_accountS, rec_authS);
 
         client.messages.list(function(err, data) {
-            res.setHeader('Content-Type', 'application/json; charset=utf-8');
+            res.setHeader('Content-Type', 'application/json');
             const jsonContent = JSON.stringify(data);
             return res.end(jsonContent);
         });          
@@ -213,13 +213,13 @@ app.post('/api/sendSms', (req,res)=>{
             })
             .then(message => console.log(message.body));
             const twiml = new MessagingResponse();
-            res.setHeader('Content-Type', 'application/json; charset=utf-8');
+            res.setHeader('Content-Type', 'text/xml');
             res.end(twiml.toString());
             //return res.redirect('/');
     }else{
         console.log("Veuillez remplir les champs nécessaires");
         const twiml = new MessagingResponse();
-        res.setHeader('Content-Type', 'application/json; charset=utf-8');
+        res.setHeader('Content-Type', 'text/xml');
         res.end(twiml.toString());
         //return res.redirect('/');
     }

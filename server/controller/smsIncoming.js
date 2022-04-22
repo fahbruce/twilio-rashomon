@@ -107,7 +107,7 @@ exports.updateSmsIncoming = (req, res) => {
     const client = require('twilio')(rec_accountS, rec_authS);
  
    client.messages.list({limit:10},function(err, data) {
-        res.setHeader('Content-Type', 'application/json; charset=utf-8');
+        res.setHeader('Content-Type', 'application/json');
         const jsonContent = JSON.stringify(data);
         return res.send(jsonContent);
     });
