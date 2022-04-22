@@ -213,13 +213,13 @@ app.post('/api/sendSms', (req,res)=>{
             })
             .then(message => console.log(message.body));
             const twiml = new MessagingResponse();
-            res.setHeader('Content-Type', 'text/xml');
+            res.setHeader('Content-Type', 'application/json; charset=utf-8');
             res.end(twiml.toString());
             //return res.redirect('/');
     }else{
         console.log("Veuillez remplir les champs nécessaires");
         const twiml = new MessagingResponse();
-        res.setHeader('Content-Type', 'text/xml');
+        res.setHeader('Content-Type', 'application/json; charset=utf-8');
         res.end(twiml.toString());
         //return res.redirect('/');
     }
