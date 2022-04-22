@@ -518,6 +518,7 @@ getNameContact(numberFromTwilioClient, divName){
           messageContent: messageContentAs
         },
         success: function(data){
+          console.log("Console data send message" + data);
             getSMS(numTel);
             successEnvoi();
             $('#messageContentAs').val("");

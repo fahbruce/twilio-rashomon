@@ -15,7 +15,9 @@ exports.findSms = (req, res) => {
     client.messages.list(function(err, data){       
              data.forEach(function(message){
             });
-            return res.send(data); 
+            res.setHeader('Content-Type', 'application/json');
+            const jsonContent = JSON.stringify(data);
+            return res.send(jsonContent);
         })
         .then(messages => messages.forEach(/*m => console.log(m.sid)*/));
 
