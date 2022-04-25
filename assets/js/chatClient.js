@@ -216,7 +216,7 @@ getNameContact(numberFromTwilioClient, divName){
                             if(numberFromCSV == numberFromTwilioClient){
                               //divName.find('span').remove();
                               divName.html('<span>' + myNewContactJSON[i].Nom + ' ' + myNewContactJSON[i].Prenom + '</span>');
-                              console.log(myNewContactJSON[i].Nom + ' tel : ' + numberFromTwilioClient + 'ou' + numberFromCSV);
+                              //console.log(myNewContactJSON[i].Nom + ' tel : ' + numberFromTwilioClient + 'ou' + numberFromCSV);
                             }
                          }
                      // Fin boucle de recuperation contenu CSV
