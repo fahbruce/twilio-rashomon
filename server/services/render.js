@@ -1,5 +1,11 @@
 const axios = require('axios');
 var Contactdb = require('../model/model_contact.js');
+const dotenv = require('dotenv');
+dotenv.config({path:'config.env'});
+
+const HOST_ = process.env.URL_HOST;
+
+console.log(HOST_);
 
 // Date
 const moment = require('moment');
@@ -19,7 +25,7 @@ exports.inscriptionRoutes = (req, res)=>{
 
 exports.listUser = (req, res)=>{
     // make a get request to api/users
-    axios.get('https://sms.rashomon-international.com/api/users')
+    axios.get(HOST_+'/api/users')
         .then(function(response){
             res.render('listeUser', {users: response.data});
         })
@@ -31,7 +37,7 @@ exports.listUser = (req, res)=>{
 
 exports.updateUser = (req, res)=>{
     // make a get request to api/users
-    axios.get('https://sms.rashomon-international.com/api/users',{params: {id:req.query.id}})
+    axios.get(HOST_+'/api/users',{params: {id:req.query.id}})
     .then(function(userData){
         res.render('update_', {user: userData.data});
     })
@@ -47,9 +53,9 @@ exports.homeRoutes = (req, res)=>{
     const rec_role = req.user.role;    
 
     
-    const req_story = axios.get('http://192.168.88.20/api/list');
-    const req_inbox = axios.get('http://192.168.88.20/api/find-sms-incoming');
-    const req_contact = axios.get('http://192.168.88.20/api/find-file');
+    const req_story = axios.get(HOST_+'/api/list');
+    const req_inbox = axios.get(HOST_+'/api/find-sms-incoming');
+    const req_contact = axios.get(HOST_+'/api/find-file');
 
     axios.all([
         req_story,
@@ -77,7 +83,7 @@ exports.homeRoutes = (req, res)=>{
 
 exports.contact = (req, res)=>{
     // make a get request to api/users
-    axios.get('https://sms.rashomon-international.com/api/find-file',{params: {id:req.query.id}})
+    axios.get('/api/find-file',{params: {id:req.query.id}})
     .then(function(contact){
         res.render('index', {user: contact.data});
     })
