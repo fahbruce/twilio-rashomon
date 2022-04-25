@@ -774,7 +774,7 @@ textarea:focus, input:focus, select:focus{
 
 li.r-nav-menu_, .left-profil label, ul.contact-list li label, ul.contact-list li label span,
 .title-sc label, .head-left span, form label, .li-inbox label, .li-inbox span, .li-inbox p, .li-inbox div
-.my-number label, .my-number span, .homeInc
+.my-number label, .my-number span, .homeInc, button
 {
     -moz-user-select: none; 
     -webkit-user-select: none; 

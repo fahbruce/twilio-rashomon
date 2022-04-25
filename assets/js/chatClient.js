@@ -556,6 +556,7 @@ getNameContact(numberFromTwilioClient, divName){
             count = tab.length;
           })
           $(".notif-sms").append("<span>"+count+"</span>");
+          //getSMSInbound();
         }
       }
     })
@@ -633,11 +634,25 @@ function afterSend(numbertelClt, divName){
    
     setInterval(getNotif_,3000);
 
-    function showNotification(body, title) {
-        var options = {
-            body: body,
-        }
-       return new Notification(title, options);
+    function showNotification(number, body, dateMessage, i) {
+        audioElement.play();
+
+        var d = new Date(dateMessage);
+        var month = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+
+        var date = d.getDate() + " " + month[d.getMonth()] + " " + d.getFullYear();
+        var time = d.toLocaleTimeString().toLowerCase();
+
+        var dateSMS = date + " " + time;
+
+        var name = localStorage.getItem(number);
+        $('.bl-notif-message').append('<div class="notif-message notif-'+i+'"><div class="clearfix new-message" title=""><div class="sym-sms"><i class="fa fa-arrow-down in-sms" title="Entrant"></i></div><div class="profil"><img src="img/profil.png" width="57px"></div><div class="about"><div class="name-clt"><span></span></div><div class="status"><span>'+name+'</span> : '+ number +'</div><div class="body-notif"><p> '+ body +'</p></div><div class="dateIn"> <span>'+ dateSMS +'</span><button class="action-new-message action-'+i+'">Ok</button></div></div></div></div>');
+        setTimeout(function(){
+          $('.bl-notif-message div.notif-'+i).remove();
+        },8000);
+        $('.action-'+i).on("click", function(){
+          $(this).parent().parent().parent().parent().remove();
+        })
     }
 
     function getNotif_(){
@@ -649,40 +664,47 @@ function afterSend(numbertelClt, divName){
             data: {
                 telUser: numTelUser
             },
-             enctype: 'multipart/form-data',
+            enctype: 'multipart/form-data',
             success:function(data){
-                const _id = data[0]._id;
-                const _dest = data[0].telDest;
-                const _exp = data[0].telExp;
-                const _message = data[0].messageIn;
-                const _oldStatus = data[0].oldStatus;
-                const _newStatus = data[0].newStatus;
-                if(_oldStatus < _newStatus){
+              const _id = data[0]._id;
+              const _dest = data[0].telDest;
+              const _exp = data[0].telExp;
+              const _dateIn = data[0].dateIn;
+              const _message = data[0].messageIn;
+              const _oldStatus = data[0].oldStatus;
+              const _newStatus = data[0].newStatus;
+
+
+              var numTelClt = _exp;
+              var name = localStorage.getItem(_exp);
+
+              // Affecter le numéro de téléphone danc l'input head phone caché
+              $('#numberChat').val(numTelClt);
+      
+              $('.my-number span').remove();
+              $('.my-number').append('<span><b>Numéro : </b>' + numTelClt + '</span>');
+      
+              var nameClient = name;
+      
+              if(name == ""){
+                  nameClient = "Inconnu";
+              }else{
+                  nameClient = name
+              }
+      
+              $('.my-number label span').remove();
+              $('.my-number label.nameExp').append('<span><b>Nom : </b> ' + nameClient + '</span>');
+      
+              $("#tempNameClient").val(nameClient);
+
+              if(numTelUser == _dest){
+                  if(_oldStatus < _newStatus){
                     var resultNotif = _newStatus - _oldStatus;
                     for(let i=0; i < resultNotif; i++){
-                        console.log(_newStatus);
-                        //console.log("notification " + [i]);
-                        if(Notification.permission === "granted"){
-                            audioElement.play();
-                            //showLoading();
                             getSMS(_exp);
                             getSMSInbound();
-                            //getSMSInStory();
-                            showNotification(_message, _dest);
-                            
-                        }else if (Notification.permission!== "denied"){
-                            console.log("your are not granted");
-                            Notification.requestPermission().then(permission => {
-                                if(permission === "granted") {
-                                    audioElement.play();
-                                   // showLoading();
-                                    getSMS(_exp);
-                                    getSMSInbound();
-                                   // getSMSInStory();
-                                    showNotification(_message, _dest);
-                                }
-                            });
-                        };
+                            getSMSInStory();
+                            showNotification(_exp, _message, _dateIn, i);
                     }
                     $.ajax({
                         type:'PUT',
@@ -697,8 +719,8 @@ function afterSend(numbertelClt, divName){
                             //console.log("notif mis à jour");
                         }
                     });
-                }
-                //console.log("NewStatus " + data[0].newStatus);
+                  }
+              }
             }
         });
     }
@@ -739,5 +761,4 @@ function afterSend(numbertelClt, divName){
       $("span.bl-status-env span.status-env").css("background","red");
       $("span.bl-status-env span.status-env").html('message non envoyé');
     }
-
 });

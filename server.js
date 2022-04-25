@@ -442,8 +442,13 @@ app.use((req, res, next) => {
 /********************************** */
 /******* RUN SERVER ********/
 /********************************** */
-app.listen(PORT, () => {
-    console.log('Server is runins on port 80');
+/*app.listen(PORT, () => {
+    
+});*/
+
+app.listen({
+    host: '192.168.88.20',
+    port: PORT
 });
 
 

@@ -548,3 +548,72 @@ span.select2{
   font-weight: 400;
   bottom: 18vh;
 }
+
+/**
+* STYLE NOTIF
+*/
+.bl-notif-message{
+  position: fixed;
+  bottom: 5px;
+  right: 15px;
+  z-index: 999;
+}
+
+.bl-notif-message .notif-message{
+  background-color: #fbfbfb;
+  width: 500px;
+  bottom: 12px;
+  box-shadow: 0 0 128px 98px #d7d7d738;
+  border-radius: 109px;
+  padding: 0 37px;
+  margin-bottom: 9px;
+  z-index: 2;
+}
+
+.notif-message .new-message{
+  display: flex;
+  padding: 25px 0;
+}
+
+.notif-message .new-message .sym-sms i.in-sms {
+  top: -28px!important;
+}
+
+.notif-message .new-message .about{
+  width: 100%;
+  padding: 0 26px;
+}
+
+.notif-message .new-message .status{
+  color: #d7555f;
+  font-size: 16px;
+  font-weight: 500;
+}
+.notif-message .new-message .dateIn{
+  color: #343434;
+  width: 100%;
+  border-top: 1px solid #e9e9e9;
+  padding-top: 6px;  
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.notif-message .new-message .dateIn button{
+  background: #d8555e;
+  border: 0px;
+  color: white;
+  padding: 3px 14px;
+  border-radius: 5px;
+}
+
+.notif-message .new-message .dateIn button:hover{
+  transition: 0.4s;
+  cursor: pointer;
+  background: #aa639f;
+}
+
+.notif-message .sym-sms{
+  top: -17px!important;
+  right: -69vh!important;
+}

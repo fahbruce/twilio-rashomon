@@ -104,6 +104,8 @@ $(document).ready(function(){
                                         var contact = $(this).attr("value");
                                         actionCamp(contact, name);
                                     })
+
+                                    localStorage.setItem('+'+myNewContactJSON[i].Contact, myNewContactJSON[i].Nom +' '+ myNewContactJSON[i].Prenom);
                                     
                                 }
                             // Fin boucle de recuperation contenu CSV
