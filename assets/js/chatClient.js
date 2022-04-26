@@ -669,7 +669,7 @@ function afterSend(numbertelClt, divName){
         var dateSMS = date + " " + time;
 
         
-        $('.bl-notif-message').append('<div class="notif-message notif-'+i+'"><div class="clearfix new-message" title=""><div class="sym-sms"><i class="fa fa-arrow-down in-sms" title="Entrant"></i></div><div class="profil"><img src="img/profil.png" width="57px"></div><div class="about"><div class="name-clt"><span></span></div><div class="status"><span>'+name+'</span> : '+ number +'</div><div class="body-notif"><p> '+ body +'</p></div><div class="dateIn"> <span>'+ dateSMS +'</span><button class="action-new-message action-'+i+'">Ok</button></div></div></div></div>');
+        $('.bl-notif-message').append('<div class="notif-message notif-'+i+'"><div class="clearfix new-message" title=""><div class="sym-sms"><i class="fa fa-arrow-down in-sms" title="Entrant"></i></div><div class="profil"><img src="img/profil.png" width="57px"></div><div class="about"><div class="name-clt"><span></span></div><div class="status"><span>'+name+'</span> : '+ number +'</div><div class="body-notif"><p class="m-0"> '+ body +'</p></div><div class="dateIn"> <span>'+ dateSMS +'</span><button class="action-new-message action-'+i+'">Ok</button></div></div></div></div>');
         setTimeout(function(){
           $('.bl-notif-message div.notif-'+i).remove();
         },8000);

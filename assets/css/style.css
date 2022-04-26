@@ -564,15 +564,15 @@ span.select2{
   width: 500px;
   bottom: 12px;
   box-shadow: 0 0 128px 98px #d7d7d738;
-  border-radius: 109px;
-  padding: 0 37px;
-  margin-bottom: 9px;
+  border-radius: 31px;
+  padding: 0 22px;
+  margin-bottom: 15px;
   z-index: 2;
 }
 
 .notif-message .new-message{
   display: flex;
-  padding: 25px 0;
+  padding: 12px 0 22px;
 }
 
 .notif-message .new-message .sym-sms i.in-sms {
