@@ -80,11 +80,12 @@ $(document).ready(function(){
 
        $("ul li.filename-contact").each(function() {
            var j = 0;
-           const lengthLiFile = $("ul li.filename-contact").length;
+           const lengthLiFile = $("ul li.filename-contact:last").val();
            while ( j <= lengthLiFile) { 
                if(j == $(this).val()){
                    var filenameC = $(this).text();
                    var url_ = '../uploads/'+filenameC;
+                 
                    $.ajax({
                        url: url_,
                        dataType: "text",

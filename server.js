@@ -131,7 +131,7 @@ app.use('/sound',express.static(path.resolve(__dirname,"assets/sound")));
     });
     app.get('/inscription',isLoggedIn, services.inscriptionRoutes);
     app.get('/lst-user', services.listUser);
-    app.get('/up-user',isLoggedIn, services.updateUser);
+    app.get('/up-user', services.updateUser);
 
     /********************************** */
     /************ Historiques **********/
@@ -447,7 +447,7 @@ app.use((req, res, next) => {
 });*/
 
 app.listen({
-    host: '192.168.88.20',
+    host: '192.168.88.18',
     port: PORT
 });
 

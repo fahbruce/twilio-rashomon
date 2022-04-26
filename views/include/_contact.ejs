@@ -28,7 +28,7 @@
     <ul class="file-list-contact" hidden>
         <% for(var i=0; i < contact.length; i++) { %>
             <% if (contact[i].idUser == id) { %>
-                <li class="clearfix lg-story filename-contact" value="<%= i %>"><%= contact[i].fileContact %></li>
+                <li class="clearfix lg-story filename-contact <%= id %>" value="<%= i %>"><%= contact[i].fileContact %></li>
             <% } %>
         <% } %> 
     </ul>

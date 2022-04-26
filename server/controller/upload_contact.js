@@ -29,9 +29,7 @@ exports.uploadContact = (req, res) => {
 exports.findFile = (req, res) => {
 
   const path_file = "assets/uploads/";
-  const rec_file = path_file + "liste_contact.csv";
-
-  console.log(req.body);
+  const rec_file = path_file + "test.csv";
 
   Contactdb.find()
             .then(data => {

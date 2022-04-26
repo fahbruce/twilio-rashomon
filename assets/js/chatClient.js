@@ -133,7 +133,6 @@ function getSMSInbound(){
       $.each(data, function(key, val){
         // Numéro des client dans twilio
         const numberFromTwilio = val.from;
-       console.log(numberFromTwilio);
         if(val.from == numTelUser || val.to == numTelUser){
             if(val.direction == "inbound"){
               var d = new Date(val.dateSent);
@@ -198,7 +197,7 @@ function
 getNameContact(numberFromTwilioClient, divName){
   $("ul li.filename-contact").each(function() {
     var j = 0;
-    const lengthLiFile = $("ul li.filename-contact").length;
+    const lengthLiFile = $("ul li.filename-contact:last").val();
     while ( j <= lengthLiFile) { 
         if(j == $(this).val()){
             var filenameC = $(this).text();
@@ -217,6 +216,8 @@ getNameContact(numberFromTwilioClient, divName){
                               //divName.find('span').remove();
                               divName.html('<span>' + myNewContactJSON[i].Nom + ' ' + myNewContactJSON[i].Prenom + '</span>');
                               //console.log(myNewContactJSON[i].Nom + ' tel : ' + numberFromTwilioClient + 'ou' + numberFromCSV);
+                            }else if(numberFromTwilioClient == numTelUser){
+                              divName.html('<span>Moi</span>');
                             }
                          }
                      // Fin boucle de recuperation contenu CSV
@@ -334,7 +335,7 @@ getNameContact(numberFromTwilioClient, divName){
           $('.m-profile').css('display','none');
           
           $.each(data, function(key, val){
-              if(val.to == numTel || val.from == numTel){
+              if(val.to == numTelUser && val.from == numTel || val.to == numTel && val.from == numTelUser){
                 /** 
                  * Format date 
                  */
@@ -635,6 +636,28 @@ function afterSend(numbertelClt, divName){
     setInterval(getNotif_,3000);
 
     function showNotification(number, body, dateMessage, i) {
+        // getLocalSorage name client
+        var name = localStorage.getItem(number);
+
+        // Affecter le numéro de téléphone danc l'input head phone caché
+        $('#numberChat').val(number);
+            
+        $('.my-number span').remove();
+        $('.my-number').append('<span><b>Numéro : </b>' + number + '</span>');
+            
+        var nameClient = name;
+            
+        if(name == ""){
+            nameClient = "Inconnu";
+        }else{
+            nameClient = name
+        }
+            
+        $('.my-number label span').remove();
+        $('.my-number label.nameExp').append('<span><b>Nom : </b> ' + nameClient + '</span>');
+            
+        $("#tempNameClient").val(nameClient);
+
         audioElement.play();
 
         var d = new Date(dateMessage);
@@ -645,7 +668,7 @@ function afterSend(numbertelClt, divName){
 
         var dateSMS = date + " " + time;
 
-        var name = localStorage.getItem(number);
+        
         $('.bl-notif-message').append('<div class="notif-message notif-'+i+'"><div class="clearfix new-message" title=""><div class="sym-sms"><i class="fa fa-arrow-down in-sms" title="Entrant"></i></div><div class="profil"><img src="img/profil.png" width="57px"></div><div class="about"><div class="name-clt"><span></span></div><div class="status"><span>'+name+'</span> : '+ number +'</div><div class="body-notif"><p> '+ body +'</p></div><div class="dateIn"> <span>'+ dateSMS +'</span><button class="action-new-message action-'+i+'">Ok</button></div></div></div></div>');
         setTimeout(function(){
           $('.bl-notif-message div.notif-'+i).remove();
@@ -666,60 +689,43 @@ function afterSend(numbertelClt, divName){
             },
             enctype: 'multipart/form-data',
             success:function(data){
-              const _id = data[0]._id;
-              const _dest = data[0].telDest;
-              const _exp = data[0].telExp;
-              const _dateIn = data[0].dateIn;
-              const _message = data[0].messageIn;
-              const _oldStatus = data[0].oldStatus;
-              const _newStatus = data[0].newStatus;
+              if(data.length > 0 ){
+                const _id = data[0]._id;
+                const _dest = data[0].telDest;
+                const _exp = data[0].telExp;
+                const _dateIn = data[0].dateIn;
+                const _message = data[0].messageIn;
+                const _oldStatus = data[0].oldStatus;
+                const _newStatus = data[0].newStatus;
 
 
-              var numTelClt = _exp;
-              var name = localStorage.getItem(_exp);
+                var numTelClt = _exp;
+                var name = localStorage.getItem(_exp);
 
-              // Affecter le numéro de téléphone danc l'input head phone caché
-              $('#numberChat').val(numTelClt);
-      
-              $('.my-number span').remove();
-              $('.my-number').append('<span><b>Numéro : </b>' + numTelClt + '</span>');
-      
-              var nameClient = name;
-      
-              if(name == ""){
-                  nameClient = "Inconnu";
-              }else{
-                  nameClient = name
-              }
-      
-              $('.my-number label span').remove();
-              $('.my-number label.nameExp').append('<span><b>Nom : </b> ' + nameClient + '</span>');
-      
-              $("#tempNameClient").val(nameClient);
-
-              if(numTelUser == _dest){
-                  if(_oldStatus < _newStatus){
-                    var resultNotif = _newStatus - _oldStatus;
-                    for(let i=0; i < resultNotif; i++){
-                            getSMS(_exp);
-                            getSMSInbound();
-                            getSMSInStory();
-                            showNotification(_exp, _message, _dateIn, i);
+                if(numTelUser == _dest){
+                    if(_oldStatus < _newStatus){
+                      var resultNotif = _newStatus - _oldStatus;
+                      for(let i=0; i < resultNotif; i++){
+                              getSMS(_exp);
+                              getSMSInbound();
+                              getSMSInStory();
+                              showNotification(_exp, _message, _dateIn, i);
+                      }
+                      $.ajax({
+                          type:'PUT',
+                          enctype: 'multipart/form-data',
+                          url: "/api/up-notif/"+_id,
+                          data: {
+                              _id : _id
+                          },
+                          contentType: false,
+                          processData: false,
+                          success:function(data){
+                              //console.log("notif mis à jour");
+                          }
+                      });
                     }
-                    $.ajax({
-                        type:'PUT',
-                        enctype: 'multipart/form-data',
-                        url: "/api/up-notif/"+_id,
-                        data: {
-                            _id : _id
-                        },
-                        contentType: false,
-                        processData: false,
-                        success:function(data){
-                            //console.log("notif mis à jour");
-                        }
-                    });
-                  }
+                }
               }
             }
         });

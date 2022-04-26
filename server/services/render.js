@@ -61,9 +61,7 @@ exports.homeRoutes = (req, res)=>{
         req_story,
         req_inbox,
         req_contact
-    ])
-
-        .then(axios.spread((response1, response2, response3) => {
+    ]).then(axios.spread((response1, response2, response3) => {
             res.render('index', {
                 messages: response1.data,
                 inbox: response2.data,
