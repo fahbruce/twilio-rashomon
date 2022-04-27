@@ -169,6 +169,34 @@
         </div>
         
     </div>
+
+    <div id="myModalExport" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content-export">
+            <form enctype="multipart/form-data">
+              <div class="form-group">
+                  <label for="">N° tel client</label>
+                  <input type="text" name="telClient" value="" class="form-control">
+
+                  <table id="tblData">
+                      <thead class="header-table">
+                        <tr>
+                            <td>Date</th>
+                            <td>Destinataire</th>
+                            <td>Expediteur</th>
+                            <td>Message</th>
+                        </tr>
+                      </thead>
+                      <tbody></tbody>
+                  </table>
+              </div>
+              <div class="action-foot_">
+                  <button type="button" class="btn btn-info btn-export">Exporter</button>
+              </div>
+          </form>
+        </div>
+      </div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="js/chatClient.js"></script>
@@ -177,6 +205,36 @@
 
     <script>
         $(document).ready(function(){
+            $('.btn-export').on('click', function(){
+                exportData('tblData', 'test-export')
+            })
+
+            function exportData(tableID, filename=""){
+                var downloadLink;
+                var dataType = 'application/vnd.ms-excel';
+                var tableSelect = document.getElementById(tableID);
+                var tableHTML = tableSelect.outerHTML.replace(/ /g,'%20');
+
+                filename = filename?filename+'.xls':'excel_data.xls';
+
+                downloadLink = document.createElement('a');
+
+                document.body.appendChild(downloadLink);
+
+                if(navigator.msSaveOrOpenBlob){
+                    var blob = new Blob(['\ufeff', tableHTML], {
+                        type: dataType
+                    });
+                    navigator.msSaveOrOpenBlob(blob, filename);
+                }else{
+                    downloadLink.href = "data:" + dataType + ', ' + tableHTML;
+
+                    downloadLink.download = filename;
+
+                    downloadLink.click();
+                }
+            }
+
             $("ul.inbox li ul.list li .body-sms").each(function(){
                 var nbCaractereSMS = $(this).find("p").text();
                 if(nbCaractereSMS.length >= 25 ){

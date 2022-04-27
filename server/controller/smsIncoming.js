@@ -1,5 +1,5 @@
 const express = require('express');
-var SmsIncoming = require('../model/model_smsIncoming');
+const SmsIncoming = require('../model/model_smsIncoming');
 
 const MessagingResponse = require('twilio').twiml.MessagingResponse;
 const app = express();

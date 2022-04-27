@@ -328,18 +328,16 @@ getNameContact(numberFromTwilioClient, divName){
       $("#chatSMS div ul").remove();     
       $(".bl-load").append('<div class="loading" style="height:81%;"><div class="lds-ellipsis">Chargement ...</div></div>');
 
-      $.ajax("/api/find-chat-client", {
-        data: {numTel: numTel},
+      $.ajax("/api/find-chat", {
+        data: {numTel: numTelUser},
         success: function(data){
           var countSMS = data.length;
           $('.m-profile').css('display','none');
-          
+          $("#tblData tbody tr").remove();
           $.each(data, function(key, val){
-              if(val.to == numTelUser && val.from == numTel || val.to == numTel && val.from == numTelUser){
-                /** 
-                 * Format date 
-                 */
-                var d = new Date(val.dateSent);
+              if(val.telDest == numTelUser && val.telExp == numTel || val.telDest == numTel && val.telExp == numTelUser){
+              
+                var d = new Date(val.dateIn);
                 var month = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
 
                 var date = d.getDate() + " " + month[d.getMonth()] + " " + d.getFullYear();
@@ -348,8 +346,9 @@ getNameContact(numberFromTwilioClient, divName){
                 var dateSMS = date + " " + time;
                 
                // $('#chatSMS').append("<ul class="+ val.direction+ "><li class=\"clearfix\"><div class=\"message-data align-right\"><span class=\"message-data-time\" >" + dateSMS + "</span> &nbsp; &nbsp;<span class=\"message-data-name\" >" + val.to + "</span> <i class=\"fa fa-circle me\"></i></div><div class=\"message other-message float-right\">" + val.body + "</div></li></ul>");  
-                $('#chatSMS div.chat-content_').prepend('<ul class="'+ val.direction +'"><li class="clearfix"><div class="message-data align-right"><span class="message-data-time" >'+ dateSMS +'</span></div><div class="message other-message float-right"><span>'+ val.body +'</span></div></li></ul>');  
-               
+                $('#chatSMS div.chat-content_').prepend('<ul class="'+ val.direction +'"><li class="clearfix"><div class="message-data align-right"><span class="message-data-time" >'+ dateSMS +'</span></div><div class="message other-message float-right"><span>'+ val.messageIn +'</span></div></li></ul>');  
+              
+                $("#tblData tbody").prepend('<tr><td>'+dateSMS+'</td><td>'+val.telDest+'</td><td>'+val.telExp+'</td><td>'+val.messageIn+'</td></tr>')
               }
           })
           $(".bl-load div.loading").remove();
@@ -698,10 +697,6 @@ function afterSend(numbertelClt, divName){
                 const _oldStatus = data[0].oldStatus;
                 const _newStatus = data[0].newStatus;
 
-
-                var numTelClt = _exp;
-                var name = localStorage.getItem(_exp);
-
                 if(numTelUser == _dest){
                     if(_oldStatus < _newStatus){
                       var resultNotif = _newStatus - _oldStatus;
@@ -767,4 +762,30 @@ function afterSend(numbertelClt, divName){
       $("span.bl-status-env span.status-env").css("background","red");
       $("span.bl-status-env span.status-env").html('message non envoyé');
     }
+
+    $(".export-xlsx").on("click", function(){
+      $.ajax("/export-data", {
+        method: "GET",
+        data: {
+          numTel: numTelUser
+        },
+        success: function(data){
+          console.log(data);
+          $.each(data, function(key, val){
+              $.ajax("/api/export-data", {
+                method: "POST",
+                data: {
+                  DateSent: val.dateIn,
+                  Destinataire: val.telDest,
+                  Expediteur: val.telExp,
+                  Message: val.messageIn,
+                },
+                success: function(data){
+                  console.log("export ok");
+                }
+              })
+          })
+        }
+      })
+    })
 });

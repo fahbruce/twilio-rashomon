@@ -20,6 +20,7 @@ const route = express.Router();
 
 const bodyparser = require('body-parser');
 const path = require('path');
+const XLSX = require('xlsx');
 
 const connectDB= require('./server/database/connection');
 
@@ -34,6 +35,7 @@ const MessagingResponse = require('twilio').twiml.MessagingResponse;
 
 dotenv.config({path:'config.env'});
 const PORT = process.env.PORT || 8080;
+const HOST_ = process.env.URL_HOST;
 
 const upload = require('express-fileupload');
 
@@ -69,6 +71,7 @@ app.use('/vendor',express.static(path.resolve(__dirname,"assets/vendor")));
 app.use('/fonts',express.static(path.resolve(__dirname,"assets/fonts")));
 app.use('/uploads',express.static(path.resolve(__dirname,"assets/uploads")));
 app.use('/sound',express.static(path.resolve(__dirname,"assets/sound")));
+app.use('/reportings',express.static(path.resolve(__dirname,"assets/reportings")));
 
 
 /* new code login */
@@ -126,10 +129,7 @@ app.use('/sound',express.static(path.resolve(__dirname,"assets/sound")));
 
     // login access
     app.get('/',isLoggedIn , services.homeRoutes);
-    app.get('/test', (req, res)=>{
-        res.render('test');
-    });
-    app.get('/inscription',isLoggedIn, services.inscriptionRoutes);
+    app.get('/inscription', services.inscriptionRoutes);
     app.get('/lst-user', services.listUser);
     app.get('/up-user', services.updateUser);
 
@@ -152,6 +152,7 @@ app.use('/sound',express.static(path.resolve(__dirname,"assets/sound")));
 
 
     app.get('/api/find-chat-client', controller.findSms)
+    app.get('/api/find-chat', controller.findSmsBdd)
     
     app.get('/api/find-file/', uploadController.findFile)
 
@@ -196,15 +197,34 @@ app.post('/api/sendSms', (req,res)=>{
     const number = req.body.numTel;
     const numberExp = req.body.numTelExp;
     const messageC = req.body.messageContent;
+    var rec_dateIn = new Date();
 
     const rec_accountS = process.env.TWILIO_ACCOUNT_SID;
     const rec_authS = process.env.TWILIO_AUTH_TOKEN;
 
     const client = require('twilio')(rec_accountS, rec_authS);
 
-    console.log(numberExp);
-
    if(number!= "" && messageC!="" ){
+        const smsIncoming = new SmsIncoming({
+            telDest: number,
+            telExp: numberExp,
+            messageIn: messageC,
+            direction: "outbound-api",
+            tit: numberExp,
+            dateIn: rec_dateIn,
+            status: "0"
+        });
+
+        smsIncoming.save(smsIncoming)
+            .then(data => {   
+                console.log("Message save");
+            })
+            .catch(err => 
+                res.status(500).send({
+                    message: "Erreur d'enregistrement"
+                })
+            );
+
         client.messages
             .create({
                 body: messageC, 
@@ -284,6 +304,8 @@ app.post('/api/sms-incoming', (req, res) => {
     var rec_telDest = req.body.To; // Consultant
     var rec_telExp = req.body.From; // Client
     var rec_messageIn = req.body.Body;
+    var rec_direction = "inbound";
+    var rec_tit = req.body.To;
     var rec_dateIn = new Date();
     var rec_status = 1;
 
@@ -302,8 +324,9 @@ app.post('/api/sms-incoming', (req, res) => {
             telDest: rec_telDest,
             telExp: rec_telExp,
             messageIn: rec_messageIn,
+            direction: rec_direction,
             dateIn: rec_dateIn,
-            //idUser: rec_idUser,
+            tit: rec_tit,            
             status: rec_status
         });
 
@@ -343,19 +366,15 @@ app.post('/api/sms-incoming', (req, res) => {
                       NotifSMS.findByIdAndUpdate(id, {
                           messageIn: rec_messageIn, 
                           dateIn: rec_dateIn,
-                          newStatus: _newStatus
+                          newStatus: _newStatus,
+                          telExp: rec_telExp
                         }, {useFindAndModify: false})
                            .then(data => {
                                if(!data){
-                                   //res.writeHead(200, {'Content-Type': 'text/xml'});
                                    console.log('echec');
-                               }else{
-                                   //res.writeHead(200, {'Content-Type': 'text/xml'});
-                                   console.log('notif réussi');
                                }
                            })
                            .catch(err => {
-                              // res.writeHead(200, {'Content-Type': 'text/xml'});
                                res.status(500).send({
                                    message: "La mise à jour n'est pas effectuée"
                                })
@@ -427,6 +446,56 @@ app.put('/api/up-notif/:id', (req, res) => {
                 message: "La mise à jour n'est pas effectuée"
             })
         })
+})
+
+app.get('/export-data', (req, res) => {
+     var rec_telDest = req.query.numTel;
+
+    SmsIncoming.find({tit: rec_telDest}).sort({"_id":-1})
+            .then(data => {
+                console.log(rec_telDest);
+                console.log(data);
+                if(!data){
+                    res.status(404).send({
+                        message : "sms non trouvé!"
+                    })
+                }else{
+                    res.send(data)
+                }
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message: "Erreur lors de la récupération sms"
+                })
+            })
+})
+
+
+app.post('/api/export-data', (req, res) => {
+    var wb = XLSX.utils.book_new();
+    var rec_DateSent = req.query.DateSent;
+    var rec_Destinataire = req.query.Destinataire;
+    var rec_Expediteur = req.query.Expediteur;
+    var rec_Message = req.query.Message;
+
+   var data = [
+       {
+           Date: rec_DateSent,
+           Destinataire: rec_Destinataire,
+           Expediteur: rec_Expediteur,
+           Message: rec_Message
+       }
+   ]
+
+   console.log(data);
+    var rec_telDest = "+33757912827";
+    var temp = JSON.stringify(data);
+    temp = JSON.parse(temp);
+    var ws = XLSX.utils.json_to_sheet(temp);
+    var down = __dirname+'/assets/reportings/export.xlsx'
+    XLSX.utils.book_append_sheet(wb, ws, "sheet1");
+    XLSX.writeFile(wb, down);
+    res.download(down);
 })
 
 

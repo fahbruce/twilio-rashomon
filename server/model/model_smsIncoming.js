@@ -17,6 +17,12 @@ var smsIncoming = new mongoose.Schema({
         type: String,
         required: true
     },
+    direction:{
+        type: String
+    },
+    tit:{
+        type: String
+    },
     /*idUser:{
         type: String,
         required: true

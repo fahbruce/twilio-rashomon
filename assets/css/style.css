@@ -617,3 +617,18 @@ span.select2{
   top: -17px!important;
   right: -69vh!important;
 }
+
+.modal-content-export{
+  width: 145vh;
+  background: #f3f3f3;
+  margin: auto;
+  padding: 26px 34px;
+}
+
+.action-foot_{
+  text-align: end;
+}
+
+#tblData tr td{
+  border: 1px solid #a7a7a7;
+}
