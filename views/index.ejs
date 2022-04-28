@@ -137,7 +137,7 @@
                             <i class="fa fa-envelope"></i> 
                             <span>Boîte de réception</span> 
                             
-                            <a href="/" class="refresh-pg" title="Actualiser">
+                            <a class="refresh-pg" title="Actualiser">
                                 <i class="fa fa-refresh"></i>
                             </a>
                         </div>
@@ -174,10 +174,7 @@
         <!-- Modal content -->
         <div class="modal-content-export">
             <form enctype="multipart/form-data">
-              <div class="form-group">
-                  <label for="">N° tel client</label>
-                  <input type="text" name="telClient" value="" class="form-control">
-
+              <div class="form-group bl-table">
                   <table id="tblData">
                       <thead class="header-table">
                         <tr>
@@ -206,7 +203,11 @@
     <script>
         $(document).ready(function(){
             $('.btn-export').on('click', function(){
-                exportData('tblData', 'test-export')
+                var nameClient = $("#tempNameClient").val();
+                var date_ = new Date();
+
+                var name_file = nameClient+'_'+date_;
+                exportData('tblData', name_file)
             })
 
             function exportData(tableID, filename=""){
@@ -272,23 +273,24 @@
                 }
             })
 
-          $('#searchbar').keyup(function(){
-            search_contact();
-          })
-          function search_contact() {
-            let input = document.getElementById('searchbar').value
-                input=input.toLowerCase();
-                let x = document.getElementsByClassName('lg-story');
-                
-                for (i = 0; i < x.length; i++) { 
-                    if (!x[i].innerHTML.toLowerCase().includes(input)) {
-                        x[i].style.display="none";
-                    }
-                    else {
-                        x[i].style.display="list-item";                 
+                $('#searchbar').keyup(function(){
+                    search_contact();
+                })
+
+                function search_contact() {
+                    let input = document.getElementById('searchbar').value
+                    input=input.toLowerCase();
+                    let x = document.getElementsByClassName('lg-story');
+                    
+                    for (i = 0; i < x.length; i++) { 
+                        if (!x[i].innerHTML.toLowerCase().includes(input)) {
+                            x[i].style.display="none";
+                        }
+                        else {
+                            x[i].style.display="list-item";                 
+                        }
                     }
                 }
-            }
             })
       </script>
 

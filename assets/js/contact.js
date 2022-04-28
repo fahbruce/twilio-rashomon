@@ -1,5 +1,33 @@
 
 $(document).ready(function(){
+    $(".btn-imp").attr('disabled', true);
+
+    $('.inputfile').on('change', function(){
+        var file = document.getElementById('file').files[0].name;
+        var extensions = /(\.csv)$/i; 
+        if(file != ""){
+            if (!extensions.exec(file)){
+                document.getElementById('file').value = "";
+                $('.name-file').html('<div class="bl-name-error"><span class="lab-file-err">Format de fichier non valide, Veuillez importer un fichier.csv</span></div>');
+                return false; 
+            }else{ 
+                $('.name-file').html('<span class="lab-file">Fichier : </span><span class="name-file_">'+file+'</span>');
+                $(".btn-imp").attr('disabled', false);
+                $("#formUpload").submit(function(e) {
+                    initUpload();
+                });
+            } 
+           
+        }
+    })
+
+    function initUpload(){
+        document.getElementById('file').value = "";
+        $('.name-file div').remove();
+        $('.name-file span').remove();
+        $(".btn-imp").attr('disabled', true);
+    }
+
    // Get the modal
     var modal = document.getElementById("myModal");
 
@@ -17,6 +45,7 @@ $(document).ready(function(){
     // When the user clicks on <span> (x), close the modal
     span.onclick = function() {
         modal.style.display = "none";
+        initUpload();
     }
 
      // When the user clicks on <span> (x), close the modal
@@ -33,47 +62,28 @@ $(document).ready(function(){
 
 
     // Get the modal
-    var modal = document.getElementById("myModalExport");
+    var modalExp = document.getElementById("myModalExport");
 
     // Get the button that opens the modal
-    var btn = document.getElementById("exportXlsx");
-
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
+    var btnExp = document.getElementById("exportXlsx");
 
     // When the user clicks the button, open the modal 
-    btn.onclick = function() {
-        modal.style.display = "block";
-    }
-
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-        modal.style.display = "none";
+    btnExp.onclick = function() {
+        modalExp.style.display = "block";
     }
 
      // When the user clicks on <span> (x), close the modal
      $('label .close').onclick = function() {
-        modal.style.display = "none";
+        modalExp.style.display = "none";
     }
 
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
+        if (event.target == modalExp) {
+            modalExp.style.display = "none";
         }
     }
-    
-
- /*   $('.action-foot button').on('click', function(){
-        var file = document.getElementById('file').files[0].name;
-        $.ajax("/api/upload", {
-            method: "POST",
-            data: {file: file},
-            success: function(file){
-               
-            }
-        })
-    })
+      
 
   /*  $('.action-foot button').on('click', function(){
         var file = $('input[name="file"]').name;

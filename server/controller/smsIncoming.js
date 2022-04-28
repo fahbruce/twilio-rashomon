@@ -100,16 +100,37 @@ exports.updateSmsIncoming = (req, res) => {
 
 /**
  * @description GET SMS IN TWILIO "jsAJAX"
- */
+ *//*
  exports.findSMSStoryAjax = (req, res) => {
     const rec_accountS = process.env.TWILIO_ACCOUNT_SID;
     const rec_authS = process.env.TWILIO_AUTH_TOKEN;
     const client = require('twilio')(rec_accountS, rec_authS);
  
-   client.messages.list({limit:10},function(err, data) {
+   client.messages.list(function(err, data) {
         res.setHeader('Content-Type', 'application/json');
         const jsonContent = JSON.stringify(data);
         return res.send(jsonContent);
     });
     
-  } 
+  } */
+
+  /**
+ * @description Liste des messages bdd
+ */
+ exports.findSMSStoryAjax = (req, res) => {
+    SmsIncoming.find().sort({"_id":-1})
+            .then(data => {
+                if(!data){
+                    res.status(404).send({
+                        message : "sms non trouvé!"
+                    })
+                }else{
+                    res.send(data);
+                }
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message: "Erreur lors de la récupération sms"
+                })
+            })
+} 

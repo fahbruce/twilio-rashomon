@@ -21,6 +21,10 @@ $(document).ready(function(){
 
   getSMSInbound();
   getSMSInStory();
+
+  $('.refresh-pg').on("click", function(){
+    getSMSInbound();
+  })
   
   /**
   * GET SMS JS TO INBOUND
@@ -132,10 +136,10 @@ function getSMSInbound(){
       // Rechercher les messages du twilio à l'aide d'une bloucle
       $.each(data, function(key, val){
         // Numéro des client dans twilio
-        const numberFromTwilio = val.from;
-        if(val.from == numTelUser || val.to == numTelUser){
+        const numberFromTwilio = val.telDest;
+        if(val.telDest == numTelUser || val.telExp == numTelUser){
             if(val.direction == "inbound"){
-              var d = new Date(val.dateSent);
+              var d = new Date(val.dateIn);
               var month = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
 
               var date = d.getDate() + " " + month[d.getMonth()] + " " + d.getFullYear();
@@ -143,7 +147,7 @@ function getSMSInbound(){
 
               var dateSMS = date + " " + time;
             //$('ul.story li ul.list').prepend('<li class="clearfix li-inbox li-inbox'+key+'" title="'+val.messageIn+'"><div class="sym-sms"><i class="fa fa-arrow-down in-sms" title="Entrant"></i></div><div class="profil"><img src="img/profil.png" width="57px"></div><div class="about"><input type="tel" value='+ val.telExp +' hidden> <!--hidden--><div class="name-clt"><span></span></div><div class="status">'+ val.telExp +'</div><div class="dateIn"> '+dateSMS+'</div></div></li>');
-            $('ul.story li ul.list').append('<li class="clearfix lg-story li-inbox li-inbox'+key+'" title="'+val.body+'"><div class="tp-sms-in"><span>Client</span></div><div class="sym-sms"><i class="fa fa-arrow-down in-sms" title="Entrant"></i></div><div class="profil"><img src="img/profil.png" width="57px"></div><div class="about"><input type="tel" value="'+val.from+'" hidden> <!--hidden--><div class="name-clt"><span></span></div><div class="status">'+val.from+'</div><div class="dateIn">'+dateSMS+'</div></li>');
+            $('ul.story li ul.list').append('<li class="clearfix lg-story li-inbox li-inbox'+key+'" title="'+val.messageIn+'"><div class="tp-sms-in"><span>Client</span></div><div class="sym-sms"><i class="fa fa-arrow-down in-sms" title="Entrant"></i></div><div class="profil"><img src="img/profil.png" width="57px"></div><div class="about"><input type="tel" value="'+val.telExp+'" hidden> <!--hidden--><div class="name-clt"><span></span></div><div class="status">'+val.telExp+'</div><div class="dateIn">'+dateSMS+'</div></li>');
             $("ul.story li ul.list li.li-inbox"+key).on('click', function(){
                 const numbertelClt = $(this).find('input[type=tel]').val();
                 const divName_ = $(this).find(".name-clt").find("span").text();
@@ -151,16 +155,22 @@ function getSMSInbound(){
                 answerInitHide();
               });
               const divName = $("ul.story li ul.list li.li-inbox"+key).find(".name-clt");
-              getNameContact(numberFromTwilio, divName);
+              if(numberFromTwilio == numTelUser){
+                var tempTel = $("ul.story li ul.list li.li-inbox"+key).find('input[type=tel]').val();
+                getNameContact(tempTel, divName);
+              }else{
+                getNameContact(numberFromTwilio, divName);
+              }
+              
           }else{
-              var d = new Date(val.dateSent);
+              var d = new Date(val.dateIn);
               var month = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
 
               var date = d.getDate() + " " + month[d.getMonth()] + " " + d.getFullYear();
               var time = d.toLocaleTimeString().toLowerCase();
 
               var dateSMS = date + " " + time;
-            $('ul.story li ul.list').append('<li class="clearfix lg-story li-inbox li-inbox'+key+'" title="'+val.body+'"><div class="tp-sms-out"><span>Vous</span></div><div class="sym-sms"><i class="fa fa-arrow-down out-sms" title="Sortant"></i></div><div class="profil"><img src="img/profil.png" width="57px"></div><div class="about"><input type="tel" value="'+val.from+'" hidden> <!--hidden--><div class="name-clt"><span></span></div><div class="status">'+val.from+'</div><div class="dateIn">'+dateSMS+'</div></div></li>');
+            $('ul.story li ul.list').append('<li class="clearfix lg-story li-inbox li-inbox'+key+'" title="'+val.messageIn+'"><div class="tp-sms-out"><span>Vous</span></div><div class="sym-sms"><i class="fa fa-arrow-down out-sms" title="Sortant"></i></div><div class="profil"><img src="img/profil.png" width="57px"></div><div class="about"><input type="tel" value="'+val.telDest+'" hidden> <!--hidden--><div class="name-clt"><span></span></div><div class="status">'+val.telDest+'</div><div class="dateIn">'+dateSMS+'</div></div></li>');
             $("ul.story li ul.list li.li-inbox"+key).on('click', function(){
               const numbertelClt = $(this).find('input[type=tel]').val();
               const divName_ = $(this).find(".name-clt").find("span").text();
@@ -216,9 +226,9 @@ getNameContact(numberFromTwilioClient, divName){
                               //divName.find('span').remove();
                               divName.html('<span>' + myNewContactJSON[i].Nom + ' ' + myNewContactJSON[i].Prenom + '</span>');
                               //console.log(myNewContactJSON[i].Nom + ' tel : ' + numberFromTwilioClient + 'ou' + numberFromCSV);
-                            }else if(numberFromTwilioClient == numTelUser){
-                              divName.html('<span>Moi</span>');
-                            }
+                            }/*else if(numberFromTwilioClient == numTelUser){
+                             // divName.html('<span>Moi</span>');
+                            }*/
                          }
                      // Fin boucle de recuperation contenu CSV
                 }
@@ -285,6 +295,7 @@ getNameContact(numberFromTwilioClient, divName){
   }
 
   function clickList(numbertelClt, divName){
+        $("#exportXlsx").css("display","flex");
         $('.h-d').css('display','none');
         var numTelClt = numbertelClt;
 

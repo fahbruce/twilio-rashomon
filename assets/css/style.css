@@ -629,6 +629,108 @@ span.select2{
   text-align: end;
 }
 
+#tblData{
+  width: 100%;
+  margin: 0 0 31px;
+}
+
 #tblData tr td{
   border: 1px solid #a7a7a7;
+}
+
+#tblData thead{
+  position: sticky!important;
+  top: -1px;
+  background: linear-gradient(120deg, #db545a, #a665a6);
+}
+
+#tblData thead tr{
+  color: #fff;
+}
+
+#tblData tbody{
+  background: #fff;
+}
+
+.modal{
+  padding-top: 47px!important;
+}
+
+.bl-table{
+  height: 56vh;
+  overflow-y: scroll;
+  margin: 20px 0 0;
+}
+
+.my-number :nth-child(4) {
+  order: -1!important;
+}
+
+#exportXlsx{
+  background: #f8c923;
+  border: 0;
+  padding: 3px 22px;
+  border-radius: 5px;
+  color: #ffffff;
+  display: none;
+}
+
+#exportXlsx:hover{
+  background: #e3b30c;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.btn-info.disabled, .btn-info:disabled {
+  background-color: #c1c1c1!important;
+  border-color: #cdcdcd!important;
+  -moz-user-select: none; 
+  -webkit-user-select: none; 
+  -ms-user-select: none; 
+  user-select: none
+}
+.bl-name-file{
+  margin: 15px 0;
+}
+
+.bl-name-error{
+  background: #ffa9a933;
+  padding: 5px 19px 7px;
+  border-radius: 5px;
+}
+
+.name-file_{
+  color: #44a10a;
+}
+
+.lab-file-err{
+  color: #d32e2e;
+}
+.notice-imp{
+  background: #f9f9f9;
+  width: 100%;
+  margin: 1px 0 24px;
+  border: 1px solid whitesmoke;
+  padding: 6px 0 13px;
+  color: #bbbbbb;
+  font-size: 14px;
+  border-radius: 3px;
+}
+
+.notice-imp span{
+  color: #979797;
+  padding: 0 11px;
+  font-size: 19px;
+  position: relative;
+  top: 2px;
+}
+
+.bl-name-error{
+  background: #ffa9a933;
+  padding: 5px 19px 7px;
+  border-radius: 5px;
+}
+
+.btn-imp:hover{
+  cursor: pointer !important;
 }

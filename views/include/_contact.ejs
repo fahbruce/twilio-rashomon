@@ -2,15 +2,17 @@
 <div id="myModal" class="modal">
   <!-- Modal content -->
   <div class="modal-content">
-      <form method="POST" action="api/upload" enctype="multipart/form-data">
+      <form id="formUpload" method="POST" action="api/upload" enctype="multipart/form-data">
         <div class="content">
             <span class="close">&times;</span>
             <!--Importer un fichier.csv-->
+            <label for="" class="notice-imp"><span><i class="fa fa-info-circle"></i></span>Descripteurs du fichier CSV : Nom,Prenom,Contact </label>
             <input type="file" name="file" id="file" class="inputfile" />
             <label for="file" class="m-0">Import contacts '.csv'</label>
+            <div class="bl-name-file"><div class="name-file"></div></div>
         </div>
         <div class="action-foot">
-            <button type="submit" class="btn btn-info">Ok</button>
+            <button type="submit" class="btn btn-info btn-imp">Ok</button>
         </div>
     </form>
   </div>

@@ -200,6 +200,7 @@ body{
     display: flex;
     align-items: center;
     padding: 20px 0 25px!important;
+    flex-direction: row-reverse;
 }
 
 .action-send, .action-send-2{
@@ -279,7 +280,6 @@ ul.list li.clearfix .about{
 
 .resp-message{
     width: 100%;
-    background: #dddddd;
     height: 17vh;
     margin-top: 25px;
 }
@@ -299,7 +299,7 @@ ul.list li.clearfix .about{
     color: #088fc3;
     border-radius: 31px;
     border: 0px solid black;
-    margin: 10px 4px 0 2px!important;
+    margin: 10px 21px 0 22px!important;
     background: transparent;
 }
 .btn-send-cust:hover{
@@ -575,7 +575,7 @@ div.search{
 div.search i{
     position: absolute;
     top: 30px;
-    right: 37px;
+    right: 14px;
     color: #d65662;
 }
 
@@ -632,6 +632,9 @@ a.refresh-pg i{
 a.refresh-pg:hover i{
     transition: 0.4s;
     color: #09d983!important;
+}
+a.refresh-pg:hover{
+    cursor: pointer;
 }
 .sym-sms{
     position: absolute;
@@ -774,7 +777,7 @@ textarea:focus, input:focus, select:focus{
 
 li.r-nav-menu_, .left-profil label, ul.contact-list li label, ul.contact-list li label span,
 .title-sc label, .head-left span, form label, .li-inbox label, .li-inbox span, .li-inbox p, .li-inbox div
-.my-number label, .my-number span, .homeInc, button
+.my-number label, .my-number span, .homeInc, button, a.refresh-pg, a.refresh-pg i
 {
     -moz-user-select: none; 
     -webkit-user-select: none; 
