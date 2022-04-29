@@ -1,4 +1,6 @@
 $(document).ready(function(){
+    const HOST_ = "http://192.168.88.18"; 
+
     function successInc(){
         $('.bl-success').append('<div class="successInc">Utilisateur enregistré avec succès :)</div>');
     }
@@ -86,7 +88,7 @@ $(document).ready(function(){
         var id = url.split("?id=").pop();
 
         var request = {
-            "url": "http://192.168.88.18/api/users/"+id,
+            "url": HOST_+"/api/users/"+id,
             "method" :"PUT",
             "data": data
         }
@@ -106,7 +108,7 @@ $(document).ready(function(){
         }else if(_password == _cpassword){
             $.ajax(request).done(function(response){
                 alert("Modification réussi!");
-                window.location.href='http://192.168.88.18/lst-user';
+                window.location.href=HOST_+'/lst-user';
             })
         }
     })
@@ -119,7 +121,7 @@ $(document).ready(function(){
             var id = $(this).attr('data-id')
 
             var request = {
-                "url": "http://192.168.88.18/api/users/"+id,
+                "url": HOST_+"/api/users/"+id,
                 "method": "DELETE"
             }
 
@@ -127,7 +129,7 @@ $(document).ready(function(){
                 $.ajax(request).done(function(response){
                     alert("Suppression réussi!");
                 })
-                window.location.href='http://192.168.88.18/lst-user';
+                window.location.href=HOST_+'/lst-user';
             }
         })
 })
