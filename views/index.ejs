@@ -202,6 +202,8 @@
 
     <script>
         $(document).ready(function(){
+            const HOST_ = "http://192.168.88.18"; 
+
             $('.btn-export').on('click', function(){
                 var nameClient = $("#tempNameClient").val();
                 var date_ = new Date();
@@ -250,7 +252,7 @@
                 $(".rl button").remove();
             }else{
                 $(".rl button").remove();
-                $(".rl").append('<button class="btn-GU"><a href="http://192.168.88.18/lst-user">Gestion des utilisateurs</a></button>');
+                $(".rl").append('<button class="btn-GU"><a href="'+HOST_+'/lst-user">Gestion des utilisateurs</a></button>');
             }
 
             ////////////////////////////////////
