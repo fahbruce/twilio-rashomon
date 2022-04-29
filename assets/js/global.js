@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    const HOST_ = "http://sms.rashomon-international.com"; 
+    const HOST_ = "http://192.168.88.18"; 
 
     function successInc(){
         $('.bl-success').append('<div class="successInc">Utilisateur enregistré avec succès :)</div>');

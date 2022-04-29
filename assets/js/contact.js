@@ -14,7 +14,7 @@ $(document).ready(function(){
                 $('.name-file').html('<span class="lab-file">Fichier : </span><span class="name-file_">'+file+'</span>');
                 $(".btn-imp").attr('disabled', false);
                 $("#formUpload").submit(function(e) {
-                    initUpload();
+                    //initUpload();
                 });
             } 
            
