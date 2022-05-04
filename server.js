@@ -516,7 +516,7 @@ app.use((req, res, next) => {
 });*/
 
 app.listen({
-    host: '192.168.88.18',
+    host: '51.77.244.245',
     port: PORT
 });
 
