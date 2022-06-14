@@ -734,3 +734,7 @@ span.select2{
 .btn-imp:hover{
   cursor: pointer !important;
 }
+
+.undefined{
+  display: none;
+}

@@ -137,7 +137,7 @@ $(document).ready(function(){
 
                             // boucle de recuperation contenu CSV
                                 for(var i = 0; i < myNewContactJSON.length; i++){
-                                    $("#table_contact ul.contact-list").append('<li class="lg-story"><label>'+ myNewContactJSON[i].Nom +' <span> '+ myNewContactJSON[i].Prenom +'</span></label><br><label>+'+ myNewContactJSON[i].Contact +'</label></label><button class="action-sms '+ myNewContactJSON[i].Contact +'" value="'+ myNewContactJSON[i].Contact +'">SMS <input value="'+ myNewContactJSON[i].Nom +' '+ myNewContactJSON[i].Prenom +'" hidden></button></li>');
+                                    $("#table_contact ul.contact-list").append('<li class="lg-story '+ myNewContactJSON[i].Nom + myNewContactJSON[i].Prenom +'"><label>'+ myNewContactJSON[i].Nom +' <span> '+ myNewContactJSON[i].Prenom +'</span></label><br><label>+'+ myNewContactJSON[i].Contact +'</label></label><button class="action-sms '+ myNewContactJSON[i].Contact +'" value="'+ myNewContactJSON[i].Contact +'">SMS <input value="'+ myNewContactJSON[i].Nom +' '+ myNewContactJSON[i].Prenom +'" hidden></button></li>');
                                     
                                     // intégration des contacts dans select2
                                     $("#select-contact").append('<option value="'+ myNewContactJSON[i].Contact +'"><span>'+ myNewContactJSON[i].Nom +' '+ myNewContactJSON[i].Prenom +' : </span><label>+'+ myNewContactJSON[i].Contact +'</label></option>');

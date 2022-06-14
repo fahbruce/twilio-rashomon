@@ -1,6 +1,6 @@
 $(document).ready(function(){
-    //const HOST_ = "http://192.168.88.18"; 
-    const HOST_ = "http://172.29.205.191"; 
+    const HOST_ = "http://192.168.88.18"; 
+    //const HOST_ = "http://192.168.88.50"; 
 
     function successInc(){
         $('.bl-success').append('<div class="successInc">Utilisateur enregistré avec succès :)</div>');
