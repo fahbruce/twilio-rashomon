@@ -4,7 +4,7 @@ const express = require('express');
 
 /* new code login */
 const session = require('express-session');
-const exphbs = require('express-handlebars');
+//const exphbs = require('express-handlebars');
 const passport = require('passport');
 const localStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');

@@ -2,7 +2,7 @@ const express = require('express');
 
 /* new code login */
 const session = require('express-session');
-const exphbs = require('express-handlebars');
+//const exphbs = require('express-handlebars');
 const passport = require('passport');
 const localStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
@@ -34,22 +34,25 @@ const MessagingResponse = require('twilio').twiml.MessagingResponse;
 
 
 dotenv.config({path:'config.env'});
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 443;
 const HOST_ = process.env.URL_HOST;
+const IP_ = process.env.HOST_IP
 
 const upload = require('express-fileupload');
 
 /********************************** */
 /******* WebPush notification *******/
 /********************************** */
-const webpush = require('web-push');
+/*const webpush = require('web-push');
 
 const publicVapidKey = process.env.PUBLIC_VAPID_KEY;
 const privateVapidKey = process.env.PRIVATE_VAPID_KEY;
 webpush.setVapidDetails('mailto:nt.peronnel@gmail.com', publicVapidKey, privateVapidKey);
+*/
 
-
+const https = require('https');
 const app = express();
+const fs = require('fs');
 
 //mongodb connection
 connectDB();
@@ -128,7 +131,7 @@ app.use('/reportings',express.static(path.resolve(__dirname,"assets/reportings")
     }
 
     // login access
-    app.get('/',isLoggedIn , services.homeRoutes);
+    app.get('/', isLoggedIn,services.homeRoutes);
     app.get('/inscription', services.inscriptionRoutes);
     app.get('/lst-user', services.listUser);
     app.get('/up-user', services.updateUser);
@@ -514,11 +517,21 @@ app.use((req, res, next) => {
 /*app.listen(PORT, () => {
     
 });*/
-
+/*
 app.listen({
     host: '51.77.244.245',
     port: PORT
-});
+});*/
+
+const sslServer = https.createServer({
+        key: fs.readFileSync(path.join('/etc/letsencrypt/live/camp.rashomon-international.com', 'privkey.pem')),
+        cert: fs.readFileSync(path.join('/etc/letsencrypt/live/camp.rashomon-international.com', 'cert.pem')),
+}, app)
+
+sslServer.listen({
+    host: IP_,
+    port: PORT
+}, () => console.log('server run with port : ' + PORT));
 
 
 module.exports = route
